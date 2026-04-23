@@ -73,7 +73,7 @@ header{position:sticky;top:0;z-index:800;background:rgba(253,250,247,.96);backdr
 .hero-slide-track{display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1);will-change:transform}
 .hero-slide{flex-shrink:0;width:100%;position:relative;overflow:hidden}
 .hero-slide img{width:100%;height:100%;object-fit:cover;display:block}
-.hero-slide-placeholder{width:100%;aspect-ratio:4/3;background:linear-gradient(140deg,var(--blush-pale),var(--blush));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:30px 20px;text-align:center}
+.hero-slide-placeholder{width:100%;min-height:360px;background:linear-gradient(140deg,var(--blush-pale),var(--blush));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:36px 24px;text-align:center}
 .hero-slide-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,26,28,.55) 0%,transparent 55%);pointer-events:none}
 .hero-slide-content{position:absolute;bottom:0;left:0;right:0;padding:20px 22px 22px;z-index:2;color:#fff}
 .hero-slide-eye{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--gold);margin-bottom:7px;display:flex;align-items:center;gap:7px}
@@ -460,10 +460,6 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
 <!-- HERO SLIDESHOW -->
 <div class="hero-slide-wrap reveal" id="heroWrap">
   <div class="hero-slide-track" id="heroTrack"></div>
-  <!-- Logo flotante -->
-  <div class="hero-slide-logo">
-    <img src="logo-2.png" alt="Sol Tinta Rosa" onerror="this.style.display='none'">
-  </div>
   <!-- Arrows -->
   <button class="hero-arr prev" id="heroPrev" onclick="heroMove(-1)" style="display:none"></button>
   <button class="hero-arr next" id="heroNext" onclick="heroMove(1)" style="display:none"></button>
@@ -1948,12 +1944,12 @@ function buildHeroSlideshow(){
   const nextBtn=document.getElementById('heroNext');
 
   if(slides.length===0){
-    // No photos — show static logo + text hero
+    // No photos — show logo + text hero
     track.innerHTML=`<div class="hero-slide" style="width:100%">
       <div class="hero-slide-placeholder">
-        <img src="logo-2.png" alt="Sol Tinta Rosa" style="height:160px;width:auto;object-fit:contain;margin-bottom:12px" onerror="this.style.display='none'">
-        <div class="hero-eye" style="justify-content:center"><span class="hero-rule"></span><span>${hc?hc.eye:t.heroEye}</span><span class="hero-rule"></span></div>
-        <h1 style="font-family:var(--serif);font-size:32px;font-weight:300;color:var(--dark);margin:8px 0;text-align:center;line-height:1.15">${hc?hc.title:t.heroTitle}</h1>
+        <img src="logo-2.png" alt="Sol Tinta Rosa" style="height:150px;width:auto;object-fit:contain;margin-bottom:4px" onerror="this.style.display='none'">
+        <div class="hero-slide-eye" style="justify-content:center"><span class="hero-slide-rule"></span>${hc?hc.eye:t.heroEye}<span class="hero-slide-rule"></span></div>
+        <h1 style="font-family:var(--serif);font-size:30px;font-weight:300;color:var(--dark);margin:6px 0 6px;text-align:center;line-height:1.15">${hc?hc.title:t.heroTitle}</h1>
         <p style="font-size:14px;font-weight:300;color:var(--mid);text-align:center;line-height:1.6;max-width:280px">${hc?hc.sub:t.heroSub}</p>
       </div>
     </div>`;
