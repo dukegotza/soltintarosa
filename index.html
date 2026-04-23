@@ -68,15 +68,39 @@ header{position:sticky;top:0;z-index:800;background:rgba(253,250,247,.96);backdr
 .nav-lnk-l{display:flex;align-items:center;gap:11px}
 .nav-lnk svg{color:var(--rose);flex-shrink:0}
 
-/* HERO */
+/* HERO SLIDESHOW */
+.hero-slide-wrap{max-width:480px;margin:0 auto;position:relative;overflow:hidden;background:var(--blush-pale)}
+.hero-slide-track{display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1);will-change:transform}
+.hero-slide{flex-shrink:0;width:100%;position:relative;overflow:hidden}
+.hero-slide img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-slide-placeholder{width:100%;aspect-ratio:4/3;background:linear-gradient(140deg,var(--blush-pale),var(--blush));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:30px 20px;text-align:center}
+.hero-slide-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,26,28,.55) 0%,transparent 55%);pointer-events:none}
+.hero-slide-content{position:absolute;bottom:0;left:0;right:0;padding:20px 22px 22px;z-index:2;color:#fff}
+.hero-slide-eye{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--gold);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+.hero-slide-rule{width:22px;height:1px;background:var(--gold)}
+.hero-slide-title{font-family:var(--serif);font-size:30px;font-weight:300;line-height:1.15;color:#fff;margin-bottom:6px}
+.hero-slide-title em{color:var(--rose);font-style:italic;font-weight:400}
+.hero-slide-sub{font-size:13px;font-weight:300;color:rgba(255,255,255,.82);line-height:1.6;max-width:300px}
+.hero-slide-logo{position:absolute;top:16px;left:50%;transform:translateX(-50%);z-index:3}
+.hero-slide-logo img{height:80px;width:auto;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.25))}
+/* Dots */
+.hero-dots{position:absolute;bottom:9px;right:14px;display:flex;gap:5px;z-index:4}
+.hero-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.5);border:none;cursor:pointer;padding:0;transition:all .22s}
+.hero-dot.on{background:#fff;width:18px;border-radius:3px}
+/* Arrows */
+.hero-arr{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.2);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.3);border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;z-index:4;transition:all .2s}
+.hero-arr:hover{background:rgba(255,255,255,.35)}
+.hero-arr.prev{left:10px}
+.hero-arr.next{right:10px}
+/* Static hero fallback */
 .hero{background:var(--blush-pale);padding:34px 20px 26px;text-align:center;max-width:480px;margin:0 auto;position:relative;overflow:hidden}
 .hero-pts{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(201,132,159,.16) 1px,transparent 1px);background-size:24px 24px;pointer-events:none}
 .hero-c{position:relative;z-index:1}
-.hero-eye{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--rose-deep);font-weight:700;margin-bottom:11px;display:flex;align-items:center;justify-content:center;gap:8px}
+.hero-eye{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--rose-deep);font-weight:700;margin-bottom:11px;display:flex;align-items:center;justify-content:center;gap:8px}
 .hero-rule{width:26px;height:1px;background:var(--gold)}
-.hero h1{font-family:var(--serif);font-size:35px;font-weight:300;line-height:1.1;color:var(--dark);margin-bottom:9px}
+.hero h1{font-family:var(--serif);font-size:36px;font-weight:300;line-height:1.1;color:var(--dark);margin-bottom:9px}
 .hero h1 em{color:var(--rose-deep);font-style:italic;font-weight:400}
-.hero p{color:var(--mid);font-size:13.5px;font-weight:300;max-width:275px;margin:0 auto;line-height:1.7}
+.hero p{color:var(--mid);font-size:15px;font-weight:300;max-width:275px;margin:0 auto;line-height:1.7}
 
 /* AI BANNER */
 .ai-banner{max-width:480px;margin:0 auto;padding:0 12px;display:none}
@@ -94,7 +118,7 @@ header{position:sticky;top:0;z-index:800;background:rgba(253,250,247,.96);backdr
 .cat-wrap{max-width:480px;margin:0 auto;padding:15px 12px 0}
 .cat-scroll{display:flex;gap:7px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
 .cat-scroll::-webkit-scrollbar{display:none}
-.cat-pill{white-space:nowrap;padding:8px 15px;border:1px solid var(--border);border-radius:24px;font-size:12.5px;font-weight:600;cursor:pointer;transition:all .2s;background:var(--white);color:var(--mid);flex-shrink:0;font-family:var(--sans);display:flex;align-items:center;gap:5px}
+.cat-pill{white-space:nowrap;padding:10px 18px;border:1px solid var(--border);border-radius:24px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;background:var(--white);color:var(--mid);flex-shrink:0;font-family:var(--sans);display:flex;align-items:center;gap:6px}
 .cat-pill svg{flex-shrink:0}
 .cat-pill.active{background:var(--dark);border-color:var(--dark);color:#fff}
 .cat-pill.active svg{color:var(--gold)}
@@ -106,7 +130,7 @@ header{position:sticky;top:0;z-index:800;background:rgba(253,250,247,.96);backdr
 .mat-wrap{max-width:480px;margin:0 auto;padding:8px 12px 10px}
 .mat-scroll{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
 .mat-scroll::-webkit-scrollbar{display:none}
-.mat-pill{white-space:nowrap;padding:5px 13px;border:1px solid var(--border);border-radius:18px;font-size:11.5px;font-weight:500;cursor:pointer;transition:all .18s;background:transparent;color:var(--mid);flex-shrink:0;font-family:var(--sans);display:flex;align-items:center;gap:4px}
+.mat-pill{white-space:nowrap;padding:7px 15px;border:1px solid var(--border);border-radius:18px;font-size:13px;font-weight:600;cursor:pointer;transition:all .18s;background:transparent;color:var(--mid);flex-shrink:0;font-family:var(--sans);display:flex;align-items:center;gap:5px}
 .mat-pill svg{color:var(--gold);flex-shrink:0}
 .mat-pill.active{background:var(--rose-deep);border-color:var(--rose-deep);color:#fff}
 .mat-pill.active svg{color:rgba(255,255,255,.7)}
@@ -114,27 +138,27 @@ header{position:sticky;top:0;z-index:800;background:rgba(253,250,247,.96);backdr
 
 /* DISCOUNT */
 .disc-bar{max-width:480px;margin:0 auto;padding:0 12px 12px}
-.disc-inner{background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 13px;display:flex;gap:7px;align-items:center;transition:border-color .2s;box-shadow:0 1px 8px rgba(201,132,159,.06)}
+.disc-inner{background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);padding:11px 14px;display:flex;gap:7px;align-items:center;transition:border-color .2s;box-shadow:0 1px 8px rgba(201,132,159,.06)}
 .disc-inner:focus-within{border-color:var(--rose)}
-.disc-inner input{flex:1;border:none;background:transparent;font-family:var(--sans);font-size:13px;color:var(--dark);outline:none;text-transform:uppercase;letter-spacing:.8px;font-weight:500;min-width:0}
-.disc-inner input::placeholder{color:var(--blush);letter-spacing:0;text-transform:none;font-weight:400;font-size:12px}
-.d-apply{background:var(--dark);color:#fff;border:none;padding:7px 13px;border-radius:7px;font-size:12px;font-weight:700;font-family:var(--sans);cursor:pointer;flex-shrink:0;transition:background .2s}
+.disc-inner input{flex:1;border:none;background:transparent;font-family:var(--sans);font-size:14px;color:var(--dark);outline:none;text-transform:uppercase;letter-spacing:.8px;font-weight:500;min-width:0}
+.disc-inner input::placeholder{color:var(--blush);letter-spacing:0;text-transform:none;font-weight:400;font-size:13px}
+.d-apply{background:var(--dark);color:#fff;border:none;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;font-family:var(--sans);cursor:pointer;flex-shrink:0;transition:background .2s}
 .d-apply:hover{background:var(--rose-deep)}
-.d-msg{font-size:11.5px;margin-top:6px;font-weight:600;display:none}
+.d-msg{font-size:13px;margin-top:6px;font-weight:600;display:none}
 .d-msg.ok{color:#3A7A4A;display:block}
 .d-msg.err{color:#8B3A20;display:block}
 
 /* SEC HEADER */
 .sec-hd{max-width:480px;margin:0 auto;padding:2px 14px 12px;display:flex;align-items:center;justify-content:space-between}
-.sec-ttl{font-family:var(--serif);font-size:21px;font-weight:400;color:var(--dark);display:flex;align-items:center;gap:7px}
+.sec-ttl{font-family:var(--serif);font-size:24px;font-weight:400;color:var(--dark);display:flex;align-items:center;gap:7px}
 .sec-ttl::after{content:'';width:20px;height:1px;background:var(--gold);display:inline-block}
-.sec-sub{font-size:12px;color:var(--rose-deep);font-weight:600}
+.sec-sub{font-size:13px;color:var(--rose-deep);font-weight:700}
 
 /* PRODUCT GRID */
 .prod-grid{max-width:480px;margin:0 auto;padding:0 10px;display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .empty-state{max-width:480px;margin:0 auto;padding:40px 20px;text-align:center;color:var(--mid);grid-column:1/-1}
 .empty-state svg{color:var(--blush);margin-bottom:10px}
-.empty-state p{font-size:13px;font-weight:300}
+.empty-state p{font-size:15px;font-weight:400}
 .p-card{background:var(--white);border-radius:var(--r);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:transform .26s var(--ease),box-shadow .26s var(--ease);position:relative}
 .p-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
 .p-card:active{transform:scale(.97)}
@@ -142,19 +166,19 @@ header{position:sticky;top:0;z-index:800;background:rgba(253,250,247,.96);backdr
 .p-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}
 .p-card:hover .p-img img{transform:scale(1.06)}
 .p-ico{color:rgba(154,79,109,.2)}
-.p-badge{position:absolute;top:8px;left:8px;background:var(--rose-deep);color:#fff;font-size:9px;font-weight:800;padding:3px 8px;border-radius:9px;letter-spacing:.5px;text-transform:uppercase}
+.p-badge{position:absolute;top:8px;left:8px;background:var(--rose-deep);color:#fff;font-size:10px;font-weight:800;padding:4px 10px;border-radius:9px;letter-spacing:.5px;text-transform:uppercase}
 .p-badge.sale{background:#8B3A20}
 .p-badge.new-b{background:var(--dark)}
-.qadd{position:absolute;bottom:8px;right:8px;background:var(--white);border:1px solid var(--border);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--rose-deep);transition:all .18s;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.qadd{position:absolute;bottom:8px;right:8px;background:var(--white);border:1px solid var(--border);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--rose-deep);transition:all .18s;box-shadow:0 2px 8px rgba(0,0,0,.07)}
 .qadd:hover{background:var(--rose-deep);color:#fff;border-color:var(--rose-deep);transform:scale(1.1)}
-.p-info{padding:10px 12px 12px}
-.p-name{font-family:var(--serif);font-size:14px;font-weight:400;color:var(--dark);margin-bottom:2px;line-height:1.3}
-.p-mat{font-size:10.5px;color:var(--mid);margin-bottom:4px;letter-spacing:.1px}
-.p-stars{display:flex;align-items:center;gap:1px;margin-bottom:5px}
+.p-info{padding:12px 13px 14px}
+.p-name{font-family:var(--serif);font-size:16px;font-weight:400;color:var(--dark);margin-bottom:3px;line-height:1.3}
+.p-mat{font-size:12px;color:var(--mid);margin-bottom:5px;letter-spacing:.1px;font-weight:400}
+.p-stars{display:flex;align-items:center;gap:1px;margin-bottom:6px}
 .p-prow{display:flex;align-items:center;gap:5px}
-.p-price{font-weight:700;font-size:14px;color:var(--dark)}
+.p-price{font-weight:700;font-size:16px;color:var(--dark)}
 .p-price.sp{color:#8B3A20}
-.p-og{font-size:11px;color:var(--blush);text-decoration:line-through}
+.p-og{font-size:13px;color:var(--blush);text-decoration:line-through}
 
 /* SALE */
 .sale-sec{max-width:480px;margin:22px auto 0;padding:0 10px}
@@ -423,7 +447,7 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
 <div class="nav-drw" id="navDrw">
   <div class="nav-hd">
     <span class="nav-logo">
-      <img src="logo-2.png" alt="Sol Tinta Rosa" style="height:36px;width:auto;display:block"
+      <img src="logo-2.png" alt="Sol Tinta Rosa" style="height:70px;width:auto;display:block"
            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
       <span style="display:none;font-family:var(--serif);font-size:17px;font-weight:300">Sol <em style="color:var(--rose-deep);font-style:italic">Tinta</em> Rosa</span>
     </span>
@@ -433,18 +457,18 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
 </div>
 
 <!-- HERO -->
-<div class="hero reveal">
-  <div class="hero-pts"></div>
-  <div class="hero-c">
-    <div style="display:flex;justify-content:center;margin-bottom:16px">
-      <img src="logo-2.png" alt="Sol Tinta Rosa"
-           style="height:90px;width:auto;object-fit:contain"
-           onerror="this.style.display='none'">
-    </div>
-    <div class="hero-eye"><span class="hero-rule"></span><span id="heroEye"></span><span class="hero-rule"></span></div>
-    <h1 id="heroTitle"></h1>
-    <p id="heroSub"></p>
+<!-- HERO SLIDESHOW -->
+<div class="hero-slide-wrap reveal" id="heroWrap">
+  <div class="hero-slide-track" id="heroTrack"></div>
+  <!-- Logo flotante -->
+  <div class="hero-slide-logo">
+    <img src="logo-2.png" alt="Sol Tinta Rosa" onerror="this.style.display='none'">
   </div>
+  <!-- Arrows -->
+  <button class="hero-arr prev" id="heroPrev" onclick="heroMove(-1)" style="display:none"></button>
+  <button class="hero-arr next" id="heroNext" onclick="heroMove(1)" style="display:none"></button>
+  <!-- Dots -->
+  <div class="hero-dots" id="heroDots"></div>
 </div>
 
 <!-- AI BANNER -->
@@ -517,7 +541,7 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
 <!-- FOOTER -->
 <footer>
   <div class="f-logo">
-    <img src="logo-2.png" alt="Sol Tinta Rosa" style="height:52px;width:auto;object-fit:contain;display:block;margin-bottom:4px"
+    <img src="logo-2.png" alt="Sol Tinta Rosa" style="height:80px;width:auto;object-fit:contain;display:block;margin-bottom:4px"
          onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
     <span style="display:none">Sol <em>Tinta</em> Rosa</span>
   </div>
@@ -633,6 +657,13 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
         <button class="btn-save" id="aHeroSaveBtn" onclick="saveHeroContent()"></button>
         <button class="btn-sec" style="margin-top:6px" id="aHeroResetBtn" onclick="resetHeroContent()"></button>
       </div>
+      <!-- SLIDESHOW EDITOR -->
+      <div class="a-sec">
+        <p class="a-sec-ttl" id="aSlideTtl"></p>
+        <p style="font-size:12px;color:var(--mid);margin-bottom:10px;line-height:1.5" id="aSlideHint"></p>
+        <div id="slidesAdminList"></div>
+        <button class="btn-sec" style="margin-top:6px;display:flex;align-items:center;justify-content:center;gap:6px" id="aAddSlideBtn" onclick="addSlideAdmin()"></button>
+      </div>
       <div class="a-sec">
         <p class="a-sec-ttl" id="aCodeTtl"></p>
         <div class="code-list" id="codeList"></div>
@@ -739,6 +770,7 @@ function ic(name,sz=20,col='currentColor'){
     x:'<line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/>',
     bag:'<path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>',
     arrow:'<polyline points="9,6 15,12 9,18"/>',
+    arrowL:'<polyline points="15,6 9,12 15,18"/>',
     starF:'<polygon points="12,2 15.1,8.3 22,9.3 17,14.1 18.2,21 12,17.8 5.8,21 7,14.1 2,9.3 8.9,8.3" stroke="none" fill="currentColor"/>',
     starL:'<polygon points="12,2 15.1,8.3 22,9.3 17,14.1 18.2,21 12,17.8 5.8,21 7,14.1 2,9.3 8.9,8.3"/>',
     globe:'<circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>',
@@ -859,6 +891,13 @@ const T={
     aHSubLbl:'Descripción corta (debajo del título)',
     aHeroSaveBtn:'Guardar y traducir automáticamente',
     aHeroResetBtn:'Restaurar texto original',
+    aSlideTtl:'Fotos del banner principal',
+    aSlideHint:'Agrega las URLs de tus fotos. Se mostrarán automáticamente una tras otra. Pon al menos 2 fotos para activar el carrusel.',
+    aAddSlide:'+ Agregar foto',
+    aSlideUrlLbl:'URL de la imagen',
+    aSlideCaptionLbl:'Texto sobre la foto (opcional)',
+    aSlideDelBtn:'Quitar',
+    aSlideSaveBtn:'Guardar fotos del banner',
     heroSavingMsg:'Traduciendo y guardando…',
     heroSavedMsg:'Texto actualizado en los 3 idiomas',
     heroResetMsg:'Texto restaurado al original',
@@ -948,6 +987,13 @@ const T={
     aHSubLbl:'Short description (below title)',
     aHeroSaveBtn:'Save & translate automatically',
     aHeroResetBtn:'Restore original text',
+    aSlideTtl:'Main banner photos',
+    aSlideHint:'Add your photo URLs. They will display automatically one after another. Add at least 2 photos to activate the carousel.',
+    aAddSlide:'+ Add photo',
+    aSlideUrlLbl:'Image URL',
+    aSlideCaptionLbl:'Text over photo (optional)',
+    aSlideDelBtn:'Remove',
+    aSlideSaveBtn:'Save banner photos',
     heroSavingMsg:'Translating and saving…',
     heroSavedMsg:'Text updated in 3 languages',
     heroResetMsg:'Text restored to original',
@@ -1037,6 +1083,13 @@ const T={
     aHSubLbl:'Description courte (sous le titre)',
     aHeroSaveBtn:'Enregistrer et traduire automatiquement',
     aHeroResetBtn:'Restaurer le texte original',
+    aSlideTtl:'Photos du bandeau principal',
+    aSlideHint:'Ajoutez les URLs de vos photos. Elles s\'afficheront automatiquement l\'une après l\'autre. Ajoutez au moins 2 photos pour activer le carrousel.',
+    aAddSlide:'+ Ajouter une photo',
+    aSlideUrlLbl:'URL de l\'image',
+    aSlideCaptionLbl:'Texte sur la photo (optionnel)',
+    aSlideDelBtn:'Supprimer',
+    aSlideSaveBtn:'Enregistrer les photos',
     heroSavingMsg:'Traduction et enregistrement…',
     heroSavedMsg:'Texte mis à jour dans les 3 langues',
     heroResetMsg:'Texte restauré à l\'original',
@@ -1069,6 +1122,11 @@ const S={
   cart:[],currentProduct:null,currentCat:'todo',matFilter:'all',
   wa:'521XXXXXXXXXX',
   heroContent:null,
+  heroSlides:[
+    {url:'',caption:{es:'',en:'',fr:''}},
+    {url:'',caption:{es:'',en:'',fr:''}},
+    {url:'',caption:{es:'',en:'',fr:''}}
+  ],
   codes:{'FERIA10':10,'CLIENTE20':20,'BIENVENIDA15':15},
   featured:[],
   products:[
@@ -1168,9 +1226,10 @@ function renderPage(){
 
   // Hero — use custom content if set, otherwise use translation defaults
   const hc=S.heroContent&&S.heroContent[S.lang];
-  document.getElementById('heroEye').textContent=hc?hc.eye:t.heroEye;
-  document.getElementById('heroTitle').innerHTML=hc?hc.title:t.heroTitle;
-  document.getElementById('heroSub').textContent=hc?hc.sub:t.heroSub;
+  document.getElementById('heroEye') && (document.getElementById('heroEye').textContent=hc?hc.eye:t.heroEye);
+  document.getElementById('heroTitle') && (document.getElementById('heroTitle').innerHTML=hc?hc.title:t.heroTitle);
+  document.getElementById('heroSub') && (document.getElementById('heroSub').textContent=hc?hc.sub:t.heroSub);
+  buildHeroSlideshow();
 
   // AI banner label
   document.getElementById('aiLabel').textContent=t.aiLbl;
@@ -1276,6 +1335,10 @@ function renderPage(){
   document.getElementById('aHSubLbl').textContent=t.aHSubLbl;
   document.getElementById('aHeroSaveBtn').textContent=t.aHeroSaveBtn;
   document.getElementById('aHeroResetBtn').textContent=t.aHeroResetBtn;
+  document.getElementById('aSlideTtl').textContent=t.aSlideTtl;
+  document.getElementById('aSlideHint').textContent=t.aSlideHint;
+  document.getElementById('aAddSlideBtn').innerHTML=ic('plus',13)+' '+t.aAddSlide;
+  renderSlidesAdmin();
   // Preset buttons
   document.getElementById('presetGrid').innerHTML=t.presets.map((p,i)=>`
     <button class="preset-btn${S.heroContent&&S.heroContent._preset===i?' active-preset':''}" onclick="applyHeroPreset(${i})">
@@ -1868,6 +1931,140 @@ function updateImgPreview(){
     `<img class="img-thumb" src="${url}" title="Foto ${i+1}" loading="lazy" `+
     `onerror="this.outerHTML='<div class=img-thumb-ph title=Error>${ic('x',12).replace(/"/g,"'")}</div>'">`
   ).join('');
+}
+
+// ══════════════════════════════════════════════════
+// HERO SLIDESHOW
+// ══════════════════════════════════════════════════
+let heroCur=0, heroTimer=null;
+
+function buildHeroSlideshow(){
+  const t=tx();
+  const hc=S.heroContent&&S.heroContent[S.lang];
+  const slides=S.heroSlides.filter(s=>s.url&&s.url.trim());
+  const track=document.getElementById('heroTrack');
+  const dots=document.getElementById('heroDots');
+  const prevBtn=document.getElementById('heroPrev');
+  const nextBtn=document.getElementById('heroNext');
+
+  if(slides.length===0){
+    // No photos — show static logo + text hero
+    track.innerHTML=`<div class="hero-slide" style="width:100%">
+      <div class="hero-slide-placeholder">
+        <img src="logo-2.png" alt="Sol Tinta Rosa" style="height:160px;width:auto;object-fit:contain;margin-bottom:12px" onerror="this.style.display='none'">
+        <div class="hero-eye" style="justify-content:center"><span class="hero-rule"></span><span>${hc?hc.eye:t.heroEye}</span><span class="hero-rule"></span></div>
+        <h1 style="font-family:var(--serif);font-size:32px;font-weight:300;color:var(--dark);margin:8px 0;text-align:center;line-height:1.15">${hc?hc.title:t.heroTitle}</h1>
+        <p style="font-size:14px;font-weight:300;color:var(--mid);text-align:center;line-height:1.6;max-width:280px">${hc?hc.sub:t.heroSub}</p>
+      </div>
+    </div>`;
+    dots.innerHTML='';
+    prevBtn.style.display='none';
+    nextBtn.style.display='none';
+    return;
+  }
+
+  // Build slides
+  track.innerHTML=slides.map((sl,i)=>{
+    const cap=sl.caption&&sl.caption[S.lang]?sl.caption[S.lang]:'';
+    const titleHtml=hc?hc.title:t.heroTitle;
+    const eyeTxt=hc?hc.eye:t.heroEye;
+    const subTxt=hc?hc.sub:t.heroSub;
+    // Only show text overlay on first slide or if caption is set
+    const showOverlay=i===0||cap;
+    return`<div class="hero-slide" style="width:100%">
+      <img src="${sl.url}" alt="${cap||'Sol Tinta Rosa'}" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block" loading="${i===0?'eager':'lazy'}" onerror="this.parentElement.style.background='var(--blush)'">
+      ${showOverlay?`<div class="hero-slide-overlay"></div>
+      <div class="hero-slide-content">
+        ${i===0?`<div class="hero-slide-eye"><span class="hero-slide-rule"></span>${eyeTxt}<span class="hero-slide-rule"></span></div>
+        <div class="hero-slide-title">${titleHtml}</div>
+        <p class="hero-slide-sub">${subTxt}</p>`
+        :cap?`<div class="hero-slide-title" style="font-size:22px">${cap}</div>`:''
+        }`:''}
+    </div>`;
+  }).join('');
+
+  // Dots
+  dots.innerHTML=slides.map((_,i)=>`<button class="hero-dot${i===0?' on':''}" onclick="heroGo(${i})"></button>`).join('');
+
+  // Arrows (only if >1 slide)
+  prevBtn.style.display=slides.length>1?'flex':'none';
+  nextBtn.style.display=slides.length>1?'flex':'none';
+  prevBtn.innerHTML=ic('arrowL',16,'#fff');
+  nextBtn.innerHTML=ic('arrow',16,'#fff');
+
+  heroCur=0;
+  heroSetSlide(0);
+  startHeroTimer(slides.length);
+}
+
+function heroSetSlide(idx){
+  const slides=S.heroSlides.filter(s=>s.url&&s.url.trim());
+  if(!slides.length)return;
+  heroCur=((idx%slides.length)+slides.length)%slides.length;
+  const track=document.getElementById('heroTrack');
+  if(track)track.style.transform=`translateX(-${heroCur*100}%)`;
+  document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('on',i===heroCur));
+}
+
+function heroGo(idx){heroSetSlide(idx);startHeroTimer(S.heroSlides.filter(s=>s.url).length);}
+function heroMove(dir){heroGo(heroCur+dir);}
+
+function startHeroTimer(count){
+  clearInterval(heroTimer);
+  if(count>1)heroTimer=setInterval(()=>heroSetSlide(heroCur+1),4500);
+}
+
+// ══════════════════════════════════════════════════
+// SLIDES ADMIN
+// ══════════════════════════════════════════════════
+function renderSlidesAdmin(){
+  const t=tx();
+  const list=document.getElementById('slidesAdminList');
+  if(!list)return;
+  list.innerHTML=S.heroSlides.map((sl,i)=>`
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <span style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.8px">Foto ${i+1}</span>
+        <button class="a-act del" onclick="delSlide(${i})" style="font-size:11px">${ic('trash',11)} ${t.aSlideDelBtn}</button>
+      </div>
+      <div class="a-f" style="margin-bottom:6px">
+        <label style="font-size:10px;color:var(--mid);font-weight:700;margin-bottom:3px;display:block">${t.aSlideUrlLbl}</label>
+        <input type="url" placeholder="https://..." value="${sl.url||''}"
+          oninput="S.heroSlides[${i}].url=this.value"
+          style="width:100%;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;color:var(--dark)">
+      </div>
+      <div class="a-f">
+        <label style="font-size:10px;color:var(--mid);font-weight:700;margin-bottom:3px;display:block">${t.aSlideCaptionLbl}</label>
+        <input type="text" placeholder="Ej: Collares de temporada..." value="${sl.caption&&sl.caption.es||''}"
+          oninput="S.heroSlides[${i}].caption={es:this.value,en:this.value,fr:this.value}"
+          style="width:100%;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;color:var(--dark)">
+      </div>
+      ${sl.url?`<img src="${sl.url}" style="width:100%;height:80px;object-fit:cover;border-radius:7px;margin-top:8px" loading="lazy" onerror="this.style.display='none'">`:''}</div>`).join('');
+
+  // Save button
+  const existing=document.getElementById('aSlideSaveBtn');
+  if(!existing){
+    const btn=document.createElement('button');
+    btn.id='aSlideSaveBtn';btn.className='btn-save';btn.style.marginTop='4px';
+    btn.textContent=t.aSlideSaveBtn;
+    btn.onclick=saveSlides;
+    list.parentElement.appendChild(btn);
+  }else{existing.textContent=t.aSlideSaveBtn;}
+}
+
+function addSlideAdmin(){
+  S.heroSlides.push({url:'',caption:{es:'',en:'',fr:''}});
+  renderSlidesAdmin();
+}
+
+function delSlide(i){
+  S.heroSlides.splice(i,1);
+  renderSlidesAdmin();
+}
+
+function saveSlides(){
+  buildHeroSlideshow();
+  showToast(tx().savedMsg||'Fotos guardadas');
 }
 
 // ══════════════════════════════════════════════════
