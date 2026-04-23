@@ -48,7 +48,8 @@ header{position:sticky;top:0;z-index:800;background:rgba(253,250,247,.96);backdr
 .logo img{height:44px;width:auto;display:block;object-fit:contain}
 .logo-txt{font-family:var(--sans);font-size:20px;font-weight:300;color:var(--dark);letter-spacing:.3px}
 .logo-txt em{color:var(--rose-deep);font-style:italic;font-weight:400}
-.ibtn{background:none;border:none;cursor:pointer;padding:8px;display:flex;align-items:center;justify-content:center;color:var(--dark);transition:color .2s,transform .15s;border-radius:50%;position:relative}
+.ibtn{background:none;border:none;cursor:pointer;padding:8px;display:flex;align-items:center;justify-content:center;color:var(--dark);transition:color .2s,transform .15s;border-radius:50%;position:relative;-webkit-tap-highlight-color:transparent;outline:none}
+.ibtn:focus{outline:none;background:none}
 .ibtn:hover{color:var(--rose-deep)}
 .ibtn:active{transform:scale(.88)}
 .cart-dot{position:absolute;top:5px;right:5px;background:var(--rose-deep);width:7px;height:7px;border-radius:50%;display:none;border:1.5px solid var(--cream)}
@@ -1512,8 +1513,19 @@ function openProduct(id){
   const si=['gem','ruler','weight','diamond'];
   document.getElementById('specsGrid').innerHTML=t.specLbls.map((lbl,i)=>{
     let val=i===0?pMat(p):i===1?p.size:i===2?p.weight:t.premium;
-    // Auto-convert cm to inches in size field
+  // Auto-convert cm to inches in size field and translate jewelry terms
     if(i===1&&val){
+      // Translate jewelry-specific words
+      const terms={
+        en:{dije:'pendant',cadena:'chain',largo:'long',diámetro:'diameter',ajustable:'adjustable',extensión:'extension',ext:'ext',tallas:'sizes',talla:'size'},
+        fr:{dije:'pendentif',cadena:'chaîne',largo:'long',diámetro:'diamètre',ajustable:'ajustable',extensión:'extension',ext:'ext',tallas:'tailles',talla:'taille'}
+      };
+      if(S.lang!=='es'&&terms[S.lang]){
+        Object.entries(terms[S.lang]).forEach(([es,tr])=>{
+          val=val.replace(new RegExp(es,'gi'),tr);
+        });
+      }
+      // Convert cm to inches
       val=val.replace(/(\d+(?:\.\d+)?)\s*cm/g,(m,n)=>{
         const inches=(parseFloat(n)/2.54).toFixed(1);
         return `${n} cm / ${inches} in`;
@@ -1619,6 +1631,7 @@ function calcTotal(){
 }
 
 function updateCartUI(){
+  try{
   const qty=S.cart.reduce((s,i)=>s+i.qty,0),t=tx();
   const dot=document.getElementById('cartDot');if(dot){qty>0?dot.classList.add('on'):dot.classList.remove('on');}
   const empty=document.getElementById('cartEmpty'),items=document.getElementById('cartItems');
@@ -1626,12 +1639,10 @@ function updateCartUI(){
   if(S.cart.length===0){empty.style.display='block';items.innerHTML='';}
   else{
     empty.style.display='none';
-    // Calculate per-item discount eligibility
     let rem=DLIMIT;
     items.innerHTML=S.cart.map((item,idx)=>{
       const orig=item.price;
       const base=item.sale||item.price;
-      // How many units of this item get discount
       const discUnits=S.discount?Math.min(item.qty,Math.max(0,rem)):0;
       rem-=discUnits;
       const discPrice=base*(1-S.discountPct/100);
@@ -1640,7 +1651,6 @@ function updateCartUI(){
       const saved=origTotal-lineTotal;
       const hasDiscount=S.discount&&discUnits>0;
       const multiPieces=qty>1;
-
       return`<div class="c-item">
         <div class="ci-img">${ic(CATI[CATS.indexOf(item.cat)]||'gem',24)}</div>
         <div class="ci-info">
@@ -1657,11 +1667,9 @@ function updateCartUI(){
     }).join('');
   }
 
-  // Total savings banner
   const origGrand=S.cart.reduce((s,i)=>s+i.price*i.qty,0);
   const discGrand=calcTotal();
   const totalSaved=origGrand-discGrand;
-
   document.getElementById('totPrice').textContent=fmt(discGrand);
 
   const lim=document.getElementById('cartLim');
@@ -1676,9 +1684,26 @@ function updateCartUI(){
   document.getElementById('totLbl').textContent=t.cartTotal;
   document.getElementById('btnSendTxt').textContent=t.btnSend;
   document.getElementById('cartEmptyP').innerHTML=t.cartEmpty.replace('\n','<br>');
+  }catch(e){console.error('Cart UI error:',e);}
 }
 
-function toggleCart(){document.getElementById('cartDrw').classList.toggle('open');document.getElementById('cartVl').classList.toggle('open');}
+function toggleCart(){
+  try{
+    const drw=document.getElementById('cartDrw');
+    const vl=document.getElementById('cartVl');
+    const isOpen=drw.classList.contains('open');
+    if(isOpen){
+      drw.classList.remove('open');
+      vl.classList.remove('open');
+      document.body.style.overflow='';
+    }else{
+      updateCartUI();
+      drw.classList.add('open');
+      vl.classList.add('open');
+      document.body.style.overflow='hidden';
+    }
+  }catch(e){console.error('toggleCart error:',e);}
+}
 function sendCartWA(){
   if(!S.cart.length)return;const t=tx();
   const items=S.cart.map(i=>`• ${pName(i)} (×${i.qty}) — ${fmt((i.sale||i.price)*i.qty)}`).join('\n');
