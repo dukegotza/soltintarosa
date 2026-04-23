@@ -1688,21 +1688,21 @@ function updateCartUI(){
 }
 
 function toggleCart(){
-  try{
-    const drw=document.getElementById('cartDrw');
-    const vl=document.getElementById('cartVl');
-    const isOpen=drw.classList.contains('open');
-    if(isOpen){
-      drw.classList.remove('open');
-      vl.classList.remove('open');
-      document.body.style.overflow='';
-    }else{
-      updateCartUI();
-      drw.classList.add('open');
-      vl.classList.add('open');
-      document.body.style.overflow='hidden';
-    }
-  }catch(e){console.error('toggleCart error:',e);}
+  const drw=document.getElementById('cartDrw');
+  const vl=document.getElementById('cartVl');
+  if(!drw||!vl)return;
+  const isOpen=drw.classList.contains('open');
+  if(isOpen){
+    drw.classList.remove('open');
+    vl.classList.remove('open');
+    document.body.style.overflow='';
+  }else{
+    // Abre primero, luego llena el contenido
+    drw.classList.add('open');
+    vl.classList.add('open');
+    document.body.style.overflow='hidden';
+    try{updateCartUI();}catch(e){console.error('Cart UI error:',e);}
+  }
 }
 function sendCartWA(){
   if(!S.cart.length)return;const t=tx();
