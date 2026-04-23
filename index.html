@@ -43,9 +43,11 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9000;b
 
 /* HEADER */
 header{position:sticky;top:0;z-index:800;background:rgba(253,250,247,.96);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
-.hdr{display:flex;align-items:center;justify-content:space-between;padding:0 17px;height:55px;max-width:480px;margin:0 auto}
-.logo{font-family:var(--serif);font-size:20px;font-weight:300;color:var(--dark);text-decoration:none;letter-spacing:.3px}
-.logo em{color:var(--rose-deep);font-style:italic;font-weight:400}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:0 17px;height:62px;max-width:480px;margin:0 auto}
+.logo{display:flex;align-items:center;text-decoration:none;cursor:pointer}
+.logo img{height:44px;width:auto;display:block;object-fit:contain}
+.logo-txt{font-family:var(--serif);font-size:20px;font-weight:300;color:var(--dark);letter-spacing:.3px}
+.logo-txt em{color:var(--rose-deep);font-style:italic;font-weight:400}
 .ibtn{background:none;border:none;cursor:pointer;padding:8px;display:flex;align-items:center;justify-content:center;color:var(--dark);transition:color .2s,transform .15s;border-radius:50%;position:relative}
 .ibtn:hover{color:var(--rose-deep)}
 .ibtn:active{transform:scale(.88)}
@@ -409,7 +411,11 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
 <header>
   <div class="hdr">
     <button class="ibtn" id="menuBtn" onclick="openNav()"></button>
-    <a href="#" class="logo">Sol <em>Tinta</em> Rosa</a>
+    <a href="#" class="logo">
+      <img src="logo.png" alt="Sol Tinta Rosa"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="logo-txt" style="display:none">Sol <em>Tinta</em> Rosa</span>
+    </a>
     <button class="ibtn" id="cartBtn" onclick="toggleCart()">
       <span class="cart-dot" id="cartDot"></span>
     </button>
@@ -420,7 +426,11 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
 <div class="nav-ovl" id="navOvl" onclick="closeNav()"></div>
 <div class="nav-drw" id="navDrw">
   <div class="nav-hd">
-    <span class="nav-logo">Sol <em>Tinta</em> Rosa</span>
+    <span class="nav-logo">
+      <img src="logo.png" alt="Sol Tinta Rosa" style="height:36px;width:auto;display:block"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span style="display:none;font-family:var(--serif);font-size:17px;font-weight:300">Sol <em style="color:var(--rose-deep);font-style:italic">Tinta</em> Rosa</span>
+    </span>
     <button class="ibtn cbtn" id="navClose" onclick="closeNav()"></button>
   </div>
   <div class="nbody" id="navBody"></div>
@@ -430,6 +440,11 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
 <div class="hero reveal">
   <div class="hero-pts"></div>
   <div class="hero-c">
+    <div style="display:flex;justify-content:center;margin-bottom:16px">
+      <img src="logo.png" alt="Sol Tinta Rosa"
+           style="height:90px;width:auto;object-fit:contain"
+           onerror="this.style.display='none'">
+    </div>
     <div class="hero-eye"><span class="hero-rule"></span><span id="heroEye"></span><span class="hero-rule"></span></div>
     <h1 id="heroTitle"></h1>
     <p id="heroSub"></p>
@@ -505,7 +520,11 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
 
 <!-- FOOTER -->
 <footer>
-  <div class="f-logo">Sol <em>Tinta</em> Rosa</div>
+  <div class="f-logo">
+    <img src="logo.png" alt="Sol Tinta Rosa" style="height:52px;width:auto;object-fit:contain;display:block;margin-bottom:4px"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span style="display:none">Sol <em>Tinta</em> Rosa</span>
+  </div>
   <p class="f-desc" id="fDesc"></p>
   <div class="f-links" id="fLinks"></div>
   <div class="f-social" id="fSocial"></div>
