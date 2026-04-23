@@ -1511,59 +1511,36 @@ function openProduct(id){
   else{pe.className='m-price';oe.style.display='none';pce.style.display='none';}
 
   const si=['gem','ruler','weight','diamond'];
-  document.getElementById('specsGrid').innerHTML=t.specLbls.map((lbl,i)=>{
-    let val=i===0?pMat(p):i===1?p.size:i===2?p.weight:t.premium;
-  // Auto-convert cm to inches in size field and translate jewelry terms
-    if(i===1&&val){
-      // Translate jewelry-specific words
-      const terms={
-        en:{dije:'pendant',cadena:'chain',largo:'long',diámetro:'diameter',ajustable:'adjustable',extensión:'extension',ext:'ext',tallas:'sizes',talla:'size'},
-        fr:{dije:'pendentif',cadena:'chaîne',largo:'long',diámetro:'diamètre',ajustable:'ajustable',extensión:'extension',ext:'ext',tallas:'tailles',talla:'taille'}
-      };
-      if(S.lang!=='es'&&terms[S.lang]){
-        Object.entries(terms[S.lang]).forEach(([es,tr])=>{
-          val=val.replace(new RegExp(es,'gi'),tr);
-        });
-      }
-      // Convert cm to inches
-      val=val.replace(/(\d+(?:\.\d+)?)\s*cm/g,(m,n)=>{
-        const inches=(parseFloat(n)/2.54).toFixed(1);
-        return `${n} cm / ${inches} in`;
-      });
-    }
-    return`<div class="spec-c"><div class="spec-ico">${ic(si[i],16)}</div><div><p class="spec-lbl">${lbl}</p><p class="spec-val">${val}</p></div></div>`;
-  }).join('');
+  document.getElementById('specsGrid').innerHTML=t.specLbls.map((lbl,i)=>`
+    <div class="spec-c"><div class="spec-ico">${ic(si[i],16)}</div><div><p class="spec-lbl">${lbl}</p><p class="spec-val">${i===0?pMat(p):i===1?p.size:i===2?p.weight:t.premium}</p></div></div>`).join('');
 
   document.getElementById('careSec').innerHTML=`
     <p class="care-ttl">${ic('sparkle',12,'var(--rose-deep)')}&nbsp;${t.careTtl}</p>
     <div class="care-list">${pCare(p).map(c=>`<div class="care-row"><div class="care-dot"></div>${c}</div>`).join('')}</div>`;
 
-  // COMPLETE THE LOOK
-  const lookEl=document.getElementById('completeLook');
-  const lookGrid=document.getElementById('completeLookGrid');
-  const lookTtl=document.getElementById('completeLookTtl');
-  const suggestions=S.products.filter(x=>
-    x.id!==p.id &&
-    (x.mat===p.mat || x.cat!==p.cat) &&
-    x.cat!==p.cat
-  ).slice(0,4);
-  if(suggestions.length>=2){
-    lookEl.style.display='block';
-    lookTtl.innerHTML=ic('sparkle',12,'var(--gold)')+'&nbsp;'+t.completeLook;
-    lookGrid.innerHTML=suggestions.map(s=>{
-      const imgs=(s.images||[]).filter(Boolean);
-      return`<div onclick="openProduct(${s.id})" style="cursor:pointer;flex-shrink:0;width:100px;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:var(--white);transition:transform .2s" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='none'">
-        <div style="aspect-ratio:1;background:linear-gradient(135deg,var(--blush-pale),var(--blush));display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative">
-          ${imgs.length>0?`<img src="${imgs[0]}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" loading="lazy" onerror="this.style.display='none'">`:''}
-          <div style="color:rgba(154,79,109,.25);z-index:1">${ic(CATI[CATS.indexOf(s.cat)]||'gem',32)}</div>
-        </div>
-        <div style="padding:7px 8px">
-          <p style="font-size:12px;font-weight:600;color:var(--dark);line-height:1.3;margin-bottom:2px">${pName(s)}</p>
-          <p style="font-size:11px;color:var(--mid);font-weight:400">${fmt(s.sale||s.price)}</p>
-        </div>
-      </div>`;
-    }).join('');
-  }else{lookEl.style.display='none';}
+  // Complete the look - safely wrapped
+  try{
+    const lookEl=document.getElementById('completeLook');
+    const lookGrid=document.getElementById('completeLookGrid');
+    const lookTtl=document.getElementById('completeLookTtl');
+    if(lookEl&&lookGrid&&lookTtl){
+      const suggestions=S.products.filter(x=>x.id!==p.id&&x.cat!==p.cat).slice(0,4);
+      if(suggestions.length>=2){
+        lookEl.style.display='block';
+        lookTtl.innerHTML=ic('sparkle',12,'var(--gold)')+'&nbsp;'+(t.completeLook||'Completa tu look');
+        lookGrid.innerHTML=suggestions.map(s=>`
+          <div onclick="openProduct(${s.id})" style="cursor:pointer;flex-shrink:0;width:100px;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:var(--white)">
+            <div style="aspect-ratio:1;background:linear-gradient(135deg,var(--blush-pale),var(--blush));display:flex;align-items:center;justify-content:center">
+              <div style="color:rgba(154,79,109,.25)">${ic(CATI[CATS.indexOf(s.cat)]||'gem',32)}</div>
+            </div>
+            <div style="padding:7px 8px">
+              <p style="font-size:12px;font-weight:600;color:var(--dark);line-height:1.3;margin-bottom:2px">${pName(s)}</p>
+              <p style="font-size:11px;color:var(--mid)">${fmt(s.sale||s.price)}</p>
+            </div>
+          </div>`).join('');
+      }else{lookEl.style.display='none';}
+    }
+  }catch(e){console.warn('Complete look:',e);}
 
   document.getElementById('ctaLbl').innerHTML=`<strong>${fmt(dp)}</strong>${S.discount&&qty<DLIMIT?`&nbsp;·&nbsp;<span style="color:#3A7A4A;font-size:11px">${S.discount} ✓</span>`:''}`;
   document.getElementById('btnWA').href=`https://wa.me/${S.wa}?text=${encodeURIComponent(t.waMsg(pName(p),pMat(p),fmt(dp),S.discount))}`;
@@ -1631,60 +1608,35 @@ function calcTotal(){
 }
 
 function updateCartUI(){
-  try{
   const qty=S.cart.reduce((s,i)=>s+i.qty,0),t=tx();
-  const dot=document.getElementById('cartDot');if(dot){qty>0?dot.classList.add('on'):dot.classList.remove('on');}
+  const dot=document.getElementById('cartDot');
+  if(dot){qty>0?dot.classList.add('on'):dot.classList.remove('on');}
   const empty=document.getElementById('cartEmpty'),items=document.getElementById('cartItems');
-
   if(S.cart.length===0){empty.style.display='block';items.innerHTML='';}
   else{
     empty.style.display='none';
-    let rem=DLIMIT;
-    items.innerHTML=S.cart.map((item,idx)=>{
-      const orig=item.price;
-      const base=item.sale||item.price;
-      const discUnits=S.discount?Math.min(item.qty,Math.max(0,rem)):0;
-      rem-=discUnits;
-      const discPrice=base*(1-S.discountPct/100);
-      const lineTotal=discUnits*discPrice+(item.qty-discUnits)*base;
-      const origTotal=orig*item.qty;
-      const saved=origTotal-lineTotal;
-      const hasDiscount=S.discount&&discUnits>0;
-      const multiPieces=qty>1;
-      return`<div class="c-item">
+    items.innerHTML=S.cart.map((item,idx)=>`
+      <div class="c-item">
         <div class="ci-img">${ic(CATI[CATS.indexOf(item.cat)]||'gem',24)}</div>
         <div class="ci-info">
           <p class="ci-name">${pName(item)}</p>
           <p class="ci-mat">${pMat(item)} · ×${item.qty}</p>
-          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-            ${hasDiscount||item.sale?`<span style="font-size:12px;color:var(--blush);text-decoration:line-through;font-weight:400">${fmt(origTotal)}</span>`:''}
-            <span class="ci-price" style="color:${hasDiscount||item.sale?'#8B3A20':'var(--dark)'}">${fmt(lineTotal)}</span>
-            ${hasDiscount&&multiPieces&&saved>0.5?`<span style="font-size:11px;color:#3A7A4A;font-weight:600">${t.savings(fmt(saved))}</span>`:''}
-          </div>
+          <p class="ci-price">${fmt((item.sale||item.price)*item.qty)}</p>
         </div>
         <button class="ci-del" onclick="removeItem(${idx})">${ic('trash',15)}</button>
-      </div>`;
-    }).join('');
+      </div>`).join('');
   }
-
-  const origGrand=S.cart.reduce((s,i)=>s+i.price*i.qty,0);
-  const discGrand=calcTotal();
-  const totalSaved=origGrand-discGrand;
-  document.getElementById('totPrice').textContent=fmt(discGrand);
-
+  document.getElementById('totPrice').textContent=fmt(calcTotal());
   const lim=document.getElementById('cartLim');
-  if(S.discount&&qty>DLIMIT){lim.innerHTML=ic('tag',12,'#8B3A20')+'&nbsp;'+t.cartLim;lim.classList.add('on');}else lim.classList.remove('on');
-
+  if(S.discount&&qty>DLIMIT){lim.innerHTML=ic('tag',12,'#8B3A20')+'&nbsp;'+t.cartLim;lim.classList.add('on');}
+  else lim.classList.remove('on');
   const di=document.getElementById('cartDiscEl');
-  if((S.discount||S.cart.some(i=>i.sale))&&totalSaved>0.5&&S.cart.length>0){
-    di.textContent=t.cartSavingsTotal(fmt(totalSaved));di.classList.add('on');
-  }else di.classList.remove('on');
-
-  document.getElementById('cartTtl').textContent=t.cartTtl;
-  document.getElementById('totLbl').textContent=t.cartTotal;
-  document.getElementById('btnSendTxt').textContent=t.btnSend;
-  document.getElementById('cartEmptyP').innerHTML=t.cartEmpty.replace('\n','<br>');
-  }catch(e){console.error('Cart UI error:',e);}
+  if(S.discount&&S.cart.length>0){di.textContent=`${S.discount} — −${S.discountPct}%`;di.classList.add('on');}
+  else di.classList.remove('on');
+  if(document.getElementById('cartTtl'))document.getElementById('cartTtl').textContent=t.cartTtl;
+  if(document.getElementById('totLbl'))document.getElementById('totLbl').textContent=t.cartTotal;
+  if(document.getElementById('btnSendTxt'))document.getElementById('btnSendTxt').textContent=t.btnSend;
+  if(document.getElementById('cartEmptyP'))document.getElementById('cartEmptyP').innerHTML=t.cartEmpty.replace('\n','<br>');
 }
 
 function toggleCart(){
