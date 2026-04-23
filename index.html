@@ -1512,8 +1512,20 @@ function openProduct(id){
   else{pe.className='m-price';oe.style.display='none';pce.style.display='none';}
 
   const si=['gem','ruler','weight','diamond'];
-  document.getElementById('specsGrid').innerHTML=t.specLbls.map((lbl,i)=>`
-    <div class="spec-c"><div class="spec-ico">${ic(si[i],16)}</div><div><p class="spec-lbl">${lbl}</p><p class="spec-val">${i===0?pMat(p):i===1?p.size:i===2?p.weight:t.premium}</p></div></div>`).join('');
+  document.getElementById('specsGrid').innerHTML=t.specLbls.map((lbl,i)=>{
+    let val=i===0?pMat(p):i===1?p.size:i===2?p.weight:t.premium;
+    if(i===1&&val){
+      // Translate jewelry terms
+      if(S.lang==='en'){
+        val=val.replace(/dije/gi,'pendant').replace(/cadena/gi,'chain').replace(/largo/gi,'long').replace(/diámetro/gi,'diameter').replace(/ajustable/gi,'adjustable').replace(/extensión/gi,'extension').replace(/tallas/gi,'sizes').replace(/talla/gi,'size');
+      } else if(S.lang==='fr'){
+        val=val.replace(/dije/gi,'pendentif').replace(/cadena/gi,'chaîne').replace(/largo/gi,'long').replace(/diámetro/gi,'diamètre').replace(/ajustable/gi,'ajustable').replace(/extensión/gi,'extension').replace(/tallas/gi,'tailles').replace(/talla/gi,'taille');
+      }
+      // Convert cm → inches alongside
+      val=val.replace(/(\d+(?:\.\d+)?)\s*cm/g,(_,n)=>`${n} cm / ${(parseFloat(n)/2.54).toFixed(1)} in`);
+    }
+    return`<div class="spec-c"><div class="spec-ico">${ic(si[i],16)}</div><div><p class="spec-lbl">${lbl}</p><p class="spec-val">${val}</p></div></div>`;
+  }).join('');
 
   document.getElementById('careSec').innerHTML=`
     <p class="care-ttl">${ic('sparkle',12,'var(--rose-deep)')}&nbsp;${t.careTtl}</p>
@@ -1616,24 +1628,48 @@ function updateCartUI(){
   if(S.cart.length===0){empty.style.display='block';items.innerHTML='';}
   else{
     empty.style.display='none';
-    items.innerHTML=S.cart.map((item,idx)=>`
-      <div class="c-item">
+    let rem=DLIMIT;
+    items.innerHTML=S.cart.map((item,idx)=>{
+      const orig=item.price;
+      const base=item.sale||item.price;
+      const discUnits=S.discount?Math.min(item.qty,Math.max(0,rem)):0;
+      rem-=discUnits;
+      const discPrice=base*(1-S.discountPct/100);
+      const lineTotal=discUnits*discPrice+(item.qty-discUnits)*base;
+      const origTotal=orig*item.qty;
+      const saved=Math.round((origTotal-lineTotal)*100)/100;
+      const hasDiscount=S.discount&&discUnits>0;
+      const hasSale=!!item.sale;
+      const showStrike=hasDiscount||hasSale;
+      const showSavings=hasDiscount&&qty>1&&saved>0.5;
+      return`<div class="c-item">
         <div class="ci-img">${ic(CATI[CATS.indexOf(item.cat)]||'gem',24)}</div>
         <div class="ci-info">
           <p class="ci-name">${pName(item)}</p>
           <p class="ci-mat">${pMat(item)} · ×${item.qty}</p>
-          <p class="ci-price">${fmt((item.sale||item.price)*item.qty)}</p>
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:2px">
+            ${showStrike?`<span style="font-size:12px;color:var(--blush);text-decoration:line-through">${fmt(origTotal)}</span>`:''}
+            <span class="ci-price" style="color:${showStrike?'#8B3A20':'var(--dark)'};font-weight:600">${fmt(lineTotal)}</span>
+            ${showSavings?`<span style="font-size:11px;color:#3A7A4A;font-weight:600">${t.savings?t.savings(fmt(saved)):'Ahorras '+fmt(saved)}</span>`:''}
+          </div>
         </div>
         <button class="ci-del" onclick="removeItem(${idx})">${ic('trash',15)}</button>
-      </div>`).join('');
+      </div>`;
+    }).join('');
   }
-  document.getElementById('totPrice').textContent=fmt(calcTotal());
+  // Total saved footer
+  const origGrand=S.cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const discGrand=calcTotal();
+  const totalSaved=Math.round((origGrand-discGrand)*100)/100;
+  document.getElementById('totPrice').textContent=fmt(discGrand);
   const lim=document.getElementById('cartLim');
   if(S.discount&&qty>DLIMIT){lim.innerHTML=ic('tag',12,'#8B3A20')+'&nbsp;'+t.cartLim;lim.classList.add('on');}
   else lim.classList.remove('on');
   const di=document.getElementById('cartDiscEl');
-  if(S.discount&&S.cart.length>0){di.textContent=`${S.discount} — −${S.discountPct}%`;di.classList.add('on');}
-  else di.classList.remove('on');
+  if(totalSaved>0.5&&S.cart.length>0){
+    const saveTxt=t.cartSavingsTotal?t.cartSavingsTotal(fmt(totalSaved)):`Total ahorrado: ${fmt(totalSaved)}`;
+    di.textContent=saveTxt;di.classList.add('on');
+  }else di.classList.remove('on');
   if(document.getElementById('cartTtl'))document.getElementById('cartTtl').textContent=t.cartTtl;
   if(document.getElementById('totLbl'))document.getElementById('totLbl').textContent=t.cartTotal;
   if(document.getElementById('btnSendTxt'))document.getElementById('btnSendTxt').textContent=t.btnSend;
