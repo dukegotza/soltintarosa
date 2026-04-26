@@ -442,6 +442,101 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
 /* ADMIN SECTION: bundle */
 .bundle-admin { background:var(--blush-pale); border:1px solid var(--border); border-radius:10px; padding:11px; margin-top:6px; }
 .bundle-admin .a-row { margin-top:7px; }
+
+/* ── BIG CATEGORY MENU ── */
+.bigcat-wrap{max-width:480px;margin:0 auto;padding:16px 12px 8px}
+.bigcat-ttl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.bigcat-ttl::after{content:'';flex:1;height:1px;background:var(--border)}
+.bigcat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.bigcat-item{position:relative;border-radius:14px;overflow:hidden;cursor:pointer;aspect-ratio:1;background:linear-gradient(140deg,var(--blush-pale),var(--blush));border:1.5px solid transparent;transition:border-color .2s,transform .2s;-webkit-tap-highlight-color:transparent}
+.bigcat-item:active{transform:scale(.97)}
+.bigcat-item.active{border-color:var(--rose-deep)}
+.bigcat-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.bigcat-item:hover .bigcat-img,.bigcat-item:active .bigcat-img{transform:scale(1.06)}
+.bigcat-ico-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(154,79,109,.25)}
+.bigcat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,26,28,.72) 0%,rgba(30,26,28,.1) 55%)}
+.bigcat-lbl{position:absolute;bottom:0;left:0;right:0;padding:8px 8px 9px;text-align:center}
+.bigcat-name{font-size:11px;font-weight:800;color:#fff;letter-spacing:.3px;line-height:1.2;display:block;text-shadow:0 1px 4px rgba(0,0,0,.3)}
+.bigcat-count{font-size:9px;color:rgba(255,255,255,.65);font-weight:400;display:block;margin-top:1px}
+/* Wide item (featured) */
+.bigcat-item.wide{grid-column:span 2;aspect-ratio:2/1}
+.bigcat-item.wide .bigcat-name{font-size:14px}
+
+/* ── EDITORIAL BANNER ── */
+.editorial-banner{max-width:480px;margin:14px auto;padding:0 10px}
+.ed-inner{border-radius:18px;overflow:hidden;position:relative;min-height:160px;background:linear-gradient(135deg,var(--dark) 0%,var(--mauve) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:20px}
+.ed-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45}
+.ed-content{position:relative;z-index:1}
+.ed-badge{display:inline-flex;align-items:center;gap:5px;background:var(--gold);color:var(--dark);font-size:9px;font-weight:800;padding:3px 10px;border-radius:20px;letter-spacing:1px;text-transform:uppercase;margin-bottom:7px}
+.ed-title{font-family:var(--sans);font-size:24px;font-weight:300;color:#fff;line-height:1.1;margin-bottom:5px}
+.ed-title em{color:var(--rose);font-style:italic}
+.ed-sub{font-size:12px;color:rgba(255,255,255,.65);font-weight:300;margin-bottom:12px}
+.ed-btn{display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--dark);font-size:12px;font-weight:700;padding:9px 18px;border-radius:22px;border:none;cursor:pointer;font-family:var(--sans);transition:all .2s}
+.ed-btn:hover{background:var(--gold)}
+/* Admin toggle for banner */
+.ed-admin-toggle{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+
+/* ── HOVER SECOND PHOTO ── */
+.p-img .p-img-hover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s}
+.p-card:hover .p-img-hover,.p-card:active .p-img-hover{opacity:1}
+
+/* ── NEW ARRIVALS BADGE ── */
+@keyframes pulse-badge{0%,100%{box-shadow:0 0 0 0 rgba(154,79,109,.4)}70%{box-shadow:0 0 0 6px rgba(154,79,109,0)}}
+.new-arrivals-badge{display:inline-flex;align-items:center;gap:4px;background:var(--rose-deep);color:#fff;font-size:9px;font-weight:800;padding:3px 9px;border-radius:20px;letter-spacing:.8px;text-transform:uppercase;animation:pulse-badge 2s infinite}
+.new-arrivals-dot{width:5px;height:5px;background:#fff;border-radius:50%;animation:pulse-badge 1.5s infinite}
+
+/* ── FLOATING SCROLL SHOWCASE ── */
+.scroll-showcase{position:fixed;right:12px;bottom:90px;width:88px;z-index:700;pointer-events:none;opacity:0;transform:translateY(10px) scale(.9);transition:opacity .4s,transform .4s}
+.scroll-showcase.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:all}
+.ss-card{background:var(--white);border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(30,26,28,.22),0 2px 8px rgba(154,79,109,.12);border:1px solid var(--border);cursor:pointer;position:relative}
+.ss-img{width:88px;height:88px;object-fit:cover;display:block}
+.ss-img-ph{width:88px;height:88px;background:linear-gradient(140deg,var(--blush-pale),var(--blush));display:flex;align-items:center;justify-content:center;color:rgba(154,79,109,.3)}
+.ss-info{padding:6px 7px 7px}
+.ss-name{font-size:9px;font-weight:700;color:var(--dark);line-height:1.2;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ss-price{font-size:10px;font-weight:800;color:var(--rose-deep)}
+.ss-close{position:absolute;top:4px;right:4px;background:rgba(30,26,28,.5);border:none;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;z-index:2}
+.ss-dots{display:flex;justify-content:center;gap:3px;padding:3px 0 5px}
+.ss-dot{width:4px;height:4px;border-radius:50%;background:var(--blush);border:none;padding:0;cursor:pointer;transition:background .2s}
+.ss-dot.on{background:var(--rose-deep)}
+.ss-tap{font-size:8px;color:var(--mid);text-align:center;padding:0 5px 5px;font-weight:600;letter-spacing:.3px}
+
+
+/* ── ROTATING TRUST BANNER ── */
+.rtbanner-wrap{max-width:480px;margin:0 auto;position:relative;border-radius:16px;overflow:hidden;min-height:110px}
+.rtbanner-slide{position:absolute;inset:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:22px 24px;opacity:0;transition:opacity .7s ease;pointer-events:none}
+.rtbanner-slide.active{opacity:1;pointer-events:all}
+.rtbanner-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rtbanner-overlay{position:absolute;inset:0;background:rgba(30,26,28,.52)}
+.rtbanner-content{position:relative;z-index:1;text-align:center}
+.rtbanner-msg{font-family:var(--sans);font-size:15px;font-weight:700;color:#fff;line-height:1.3;letter-spacing:.3px;text-shadow:0 1px 6px rgba(0,0,0,.3)}
+.rtbanner-msg em{color:var(--gold);font-style:normal}
+.rtbanner-dots{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);display:flex;gap:4px;z-index:2}
+.rtbanner-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.4);border:none;padding:0;cursor:pointer;transition:all .2s}
+.rtbanner-dot.on{background:#fff;width:12px;border-radius:3px}
+
+/* ── NEW CAT MENU LAYOUT ── */
+.catmenu-wrap{max-width:480px;margin:0 auto;padding:12px 10px 8px}
+.catmenu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.catmenu-banner{grid-column:1/-1;border-radius:16px;overflow:hidden;position:relative;height:130px;cursor:pointer;background:linear-gradient(135deg,var(--dark),var(--mauve));-webkit-tap-highlight-color:transparent}
+.catmenu-banner:active{transform:scale(.99)}
+.catmenu-banner-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.catmenu-banner:hover .catmenu-banner-bg{transform:scale(1.04)}
+.catmenu-banner-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(30,26,28,.75) 0%,rgba(30,26,28,.2) 100%)}
+.catmenu-banner-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:18px 20px;z-index:1}
+.catmenu-banner-eyebrow{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:5px}
+.catmenu-banner-title{font-family:var(--sans);font-size:22px;font-weight:300;color:#fff;line-height:1.1;margin-bottom:4px}
+.catmenu-banner-title em{color:var(--rose);font-style:italic}
+.catmenu-banner-sub{font-size:11px;color:rgba(255,255,255,.65);font-weight:300}
+.catmenu-item{border-radius:12px;overflow:hidden;position:relative;aspect-ratio:1;cursor:pointer;background:linear-gradient(140deg,var(--blush-pale),var(--blush));border:2px solid transparent;transition:border-color .2s,transform .15s;-webkit-tap-highlight-color:transparent}
+.catmenu-item:active{transform:scale(.95)}
+.catmenu-item.active{border-color:var(--rose-deep)}
+.catmenu-item-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.catmenu-item:hover .catmenu-item-bg{transform:scale(1.08)}
+.catmenu-item-ico{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(154,79,109,.22)}
+.catmenu-item-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,26,28,.75) 0%,transparent 55%)}
+.catmenu-item-lbl{position:absolute;bottom:0;left:0;right:0;padding:5px 5px 6px;text-align:center}
+.catmenu-item-name{font-size:9.5px;font-weight:800;color:#fff;letter-spacing:.2px;display:block;text-shadow:0 1px 3px rgba(0,0,0,.4)}
+
 </style>
 </head>
 <body>
@@ -502,29 +597,12 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
   <button class="hero-arr next" id="heroNext" onclick="heroMove(1)" style="display:none"></button>
   <!-- Dots -->
   <div class="hero-dots" id="heroDots"></div>
+
+
+<!-- CAT MENU (banner + 6 items) -->
+<div class="catmenu-wrap reveal" id="catmenuWrap">
+  <div class="catmenu-grid" id="catmenuGrid"></div>
 </div>
-
-
-<!-- PHOTO MENU -->
-<div class="photo-menu-wrap reveal" id="photoMenuWrap">
-  <p class="photo-menu-ttl" id="photoMenuTtl">Colecciones</p>
-  <div class="photo-menu-scroll" id="photoMenuScroll"></div>
-</div>
-
-<!-- AI BANNER -->
-<div class="ai-banner" id="aiBanner">
-  <div class="ai-inner">
-    <div class="ai-icon" id="aiIcon"></div>
-    <div style="flex:1">
-      <p class="ai-label" id="aiLabel"></p>
-      <p class="ai-msg" id="aiMsg"></p>
-    </div>
-    <button class="ai-close" onclick="hideAIBanner()" id="aiCloseBtn"></button>
-  </div>
-</div>
-
-<!-- CAT PILLS -->
-<div class="cat-wrap"><div class="cat-scroll" id="catScroll"></div></div>
 
 <!-- MATERIAL FILTER -->
 <div class="mat-wrap"><div class="mat-scroll" id="matScroll"></div></div>
@@ -540,13 +618,52 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
 </div>
 
 <!-- SECTION HEADER -->
-<div class="sec-hd reveal">
+<div class="sec-hd reveal" id="secHdAnchor">
   <span class="sec-ttl" id="secTtl"></span>
   <span class="sec-sub" id="catLbl"></span>
 </div>
 
-<!-- PRODUCT GRID -->
-<div class="prod-grid" id="prodGrid"></div>
+<!-- PRODUCT GRID TOP (first 4) -->
+<div class="prod-grid" id="prodGridTop"></div>
+
+<!-- ROTATING TRUST BANNER -->
+<div style="padding:0 10px;max-width:480px;margin:14px auto 0">
+  <div class="rtbanner-wrap reveal" id="rtbannerWrap"></div>
+</div>
+
+<!-- PRODUCT GRID BOTTOM (rest) -->
+<div class="prod-grid" id="prodGridBottom" style="margin-top:9px"></div>
+
+<!-- AI BANNER -->
+<div class="ai-banner" id="aiBanner">
+  <div class="ai-inner">
+    <div class="ai-icon" id="aiIcon"></div>
+    <div style="flex:1">
+      <p class="ai-label" id="aiLabel"></p>
+      <p class="ai-msg" id="aiMsg"></p>
+    </div>
+    <button class="ai-close" onclick="hideAIBanner()" id="aiCloseBtn"></button>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- EDITORIAL BANNER -->
+<div class="editorial-banner reveal" id="editorialBanner">
+  <div class="ed-inner" id="edInner">
+    <img class="ed-img" id="edImg" src="" alt="" style="display:none" onerror="this.style.display='none'">
+    <div class="ed-content">
+      <span class="ed-badge" id="edBadge"></span>
+      <h3 class="ed-title" id="edTitle"></h3>
+      <p class="ed-sub" id="edSub"></p>
+      <button class="ed-btn" id="edBtn" onclick="filterCat('todo')"></button>
+    </div>
+  </div>
+</div>
 
 <!-- SALE -->
 <div class="sale-sec reveal">
@@ -822,6 +939,55 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
         <button class="btn-save" id="aWABtn" onclick="saveWA()"></button>
       </div>
 
+
+
+      <div class="a-sec">
+        <p class="a-sec-ttl">Menú de categorías — Banner principal</p>
+        <div class="a-f"><label>Etiqueta pequeña (ej: DESTACADO)</label><input type="text" id="cmBannerEye" placeholder="LO MÁS VENDIDO"></div>
+        <div class="a-f"><label>Título (usa *palabra* para cursiva)</label><input type="text" id="cmBannerTitle" placeholder="Lo que más *eligen* nuestras clientas"></div>
+        <div class="a-f"><label>Subtítulo</label><input type="text" id="cmBannerSub" placeholder="Colección completa disponible"></div>
+        <div class="a-f"><label>URL foto de fondo</label><input type="url" id="cmBannerImg" placeholder="https://..."></div>
+        <div class="a-f"><label>Lleva a categoría</label>
+          <select id="cmBannerCat">
+            <option value="todo">Todo</option>
+            <option value="aretes">Aretes</option>
+            <option value="collares">Collares</option>
+            <option value="pulseras">Pulseras</option>
+            <option value="anillos">Anillos</option>
+            <option value="sets">Sets</option>
+            <option value="rebajas">Rebajas</option>
+          </select>
+        </div>
+        <button class="btn-save" onclick="saveCatMenu()">Guardar banner principal</button>
+      </div>
+      <div class="a-sec">
+        <p class="a-sec-ttl">Menú de categorías — 6 cuadros</p>
+        <div id="cmItemsList"></div>
+        <button class="btn-sec" style="margin-top:4px" onclick="renderCmItemsAdmin()">↺ Recargar</button>
+      </div>
+      <div class="a-sec">
+        <p class="a-sec-ttl">Banner rotante (entre productos)</p>
+        <div class="toggle-row" style="margin-bottom:8px">
+          <span class="toggle-lbl">Mostrar banner</span>
+          <label class="toggle-sw"><input type="checkbox" id="rtbActive" checked><span class="toggle-slider"></span></label>
+        </div>
+        <div class="a-f"><label>Segundos entre mensajes</label><input type="number" id="rtbSpeed" placeholder="4" min="2" max="10" value="4"></div>
+        <div id="rtbMsgList" style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px"></div>
+        <button class="btn-sec" onclick="addRtbMsg()">+ Agregar mensaje</button>
+        <button class="btn-save" style="margin-top:6px" onclick="saveRtbanner()">Guardar banner rotante</button>
+      </div>
+      <div class="a-sec">
+        <p class="a-sec-ttl">Banner editorial (entre productos)</p>
+        <div class="toggle-row" style="margin-bottom:8px">
+          <span class="toggle-lbl">Mostrar banner</span>
+          <label class="toggle-sw"><input type="checkbox" id="edActive" checked onchange="saveEditorial()"><span class="toggle-slider"></span></label>
+        </div>
+        <div class="a-f"><label>Etiqueta (ej: NUEVA COLECCIÓN)</label><input type="text" id="edBadgeIn" placeholder="NUEVA COLECCIÓN" oninput="saveEditorial()"></div>
+        <div class="a-f"><label>Título (usa *palabra* para cursiva)</label><input type="text" id="edTitleIn" placeholder="Lo nuevo que *te va a encantar*" oninput="saveEditorial()"></div>
+        <div class="a-f"><label>Descripción corta</label><input type="text" id="edSubIn" placeholder="Piezas recién llegadas esta semana" oninput="saveEditorial()"></div>
+        <div class="a-f"><label>Texto del botón</label><input type="text" id="edBtnIn" placeholder="Ver todo" oninput="saveEditorial()"></div>
+        <div class="a-f"><label>URL de foto de fondo (opcional)</label><input type="url" id="edImgIn" placeholder="https://..." oninput="saveEditorial()"></div>
+      </div>
       <div class="a-sec">
         <p class="a-sec-ttl" id="aMenuTtl">Menú visual de fotos</p>
         <p style="font-size:12px;color:var(--mid);margin-bottom:10px;line-height:1.5">Agrega una foto para cada categoría del menú. Los clientes pueden tocarlas para filtrar.</p>
@@ -833,6 +999,21 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
         <button class="btn-save" id="aPwBtn" onclick="saveNewPw()"></button>
       </div>
     </div>
+  </div>
+</div>
+
+
+<!-- FLOATING SCROLL SHOWCASE -->
+<div class="scroll-showcase" id="scrollShowcase">
+  <div class="ss-card" id="ssCard">
+    <button class="ss-close" onclick="hideShowcase()" id="ssClose"></button>
+    <div id="ssImgWrap"></div>
+    <div class="ss-info">
+      <p class="ss-name" id="ssName"></p>
+      <p class="ss-price" id="ssPrice"></p>
+    </div>
+    <div class="ss-dots" id="ssDots"></div>
+    <p class="ss-tap" id="ssTap">Toca para ver</p>
   </div>
 </div>
 
@@ -1210,6 +1391,35 @@ const S={
   cart:[],currentProduct:null,currentCat:'todo',matFilter:'all',
   wa:'521XXXXXXXXXX',
   heroContent:null,
+  catMenu:{
+    banner:{eye:'LO MÁS VENDIDO',title:'Lo que más *eligen* nuestras clientas',sub:'Colección completa disponible',img:'',cat:'todo'},
+    items:[
+      {name:'Aretes',cat:'aretes',img:''},
+      {name:'Collares',cat:'collares',img:''},
+      {name:'Pulseras',cat:'pulseras',img:''},
+      {name:'Anillos',cat:'anillos',img:''},
+      {name:'Sets',cat:'sets',img:''},
+      {name:'Rebajas',cat:'rebajas',img:''}
+    ]
+  },
+  rtbanner:{
+    active:true,
+    speed:4,
+    messages:[
+      {text:'Atención personal por *WhatsApp*',img:''},
+      {text:'*Acero* que sí dura — sin manchas, sin alergias',img:''},
+      {text:'Visita nuestra *tienda física* y prueba los productos',img:''},
+      {text:'Envíos a *todo México* — rápido y seguro',img:''}
+    ]
+  },
+  editorial:{
+    active:true,
+    badge:'NUEVA COLECCIÓN',
+    title:'Lo nuevo que *te va a encantar*',
+    sub:'Piezas recién llegadas esta semana',
+    btn:'Ver todo',
+    img:''
+  },
   heroSlides:[
     {url:'',caption:{es:'',en:'',fr:''}},
     {url:'',caption:{es:'',en:'',fr:''}},
@@ -1324,11 +1534,7 @@ function renderPage(){
   document.getElementById('aiIcon').innerHTML=ic('sparkle',18,'var(--rose-deep)');
   document.getElementById('aiCloseBtn').innerHTML=ic('x',14,'var(--blush)');
 
-  // Cat pills
-  document.getElementById('catScroll').innerHTML=t.cats.map((label,i)=>{
-    const cat=CATS[i];
-    return`<button class="cat-pill${S.currentCat===cat?' active':''}${cat==='rebajas'?' sale-p':''}" onclick="filterCat('${cat}')">${ic(CATI[i],13)}${label}</button>`;
-  }).join('');
+  // Cat pills removed — now using catmenu
 
   // Material filter
   const matLabels=['matAll','matGold','matSteel','matSteelGold'];
@@ -1343,6 +1549,19 @@ function renderPage(){
 
   // Section header
   document.getElementById('secTtl').textContent=t.secTtl;
+  // New arrivals badge - show if any product has 'new' badge
+  const hasNew=S.products.some(p=>p.badge==='new');
+  const secHd=document.querySelector('.sec-hd');
+  let newBadgeEl=document.getElementById('newArrivalsBadge');
+  if(hasNew&&secHd){
+    if(!newBadgeEl){
+      newBadgeEl=document.createElement('span');
+      newBadgeEl.id='newArrivalsBadge';
+      newBadgeEl.className='new-arrivals-badge';
+      secHd.insertBefore(newBadgeEl,secHd.firstChild);
+    }
+    newBadgeEl.innerHTML=`<span class="new-arrivals-dot"></span>Nuevo`;
+  }else if(newBadgeEl){newBadgeEl.remove();}
   document.getElementById('catLbl').textContent=t.cats[CATS.indexOf(S.currentCat)]||t.cats[0];
 
   // Sale
@@ -1509,35 +1728,79 @@ function filteredProducts(){
 }
 
 function renderProducts(){
-  const t=tx(),prods=filteredProducts(),grid=document.getElementById('prodGrid');
-  if(prods.length===0){
-    grid.innerHTML=`<div class="empty-state">${ic('gem',36,'var(--blush)')}<p>${t.noResults}</p></div>`;
-    return;
+  const t=tx();
+  let filtered=S.products.filter(p=>{
+    if(S.currentCat!=='todo'&&S.currentCat!=='rebajas'&&p.cat!==S.currentCat)return false;
+    if(S.currentCat==='rebajas'&&!p.sale)return false;
+    if(S.matFilter!=='all'&&p.mat!==S.matFilter)return false;
+    return true;
+  });
+  // Featured first
+  if(S.featured&&S.featured.length>0&&S.currentCat==='todo'){
+    const feat=filtered.filter(p=>S.featured.includes(p.id));
+    const rest=filtered.filter(p=>!S.featured.includes(p.id));
+    filtered=[...feat,...rest];
   }
-  grid.innerHTML=prods.map(p=>{
-    const base=p.sale||p.price,dp=S.discount?base*(1-S.discountPct/100):base;
+
+  const topGrid=document.getElementById('prodGridTop');
+  const botGrid=document.getElementById('prodGridBottom');
+  const topProds=filtered.slice(0,4);
+  const botProds=filtered.slice(4);
+
+  function cardHtml(p){
     const catIdx=CATS.indexOf(p.cat);
-    const badgeLbl=pBadgeLabel(p);
-    const badgeHtml=badgeLbl?`<div class="p-badge ${p.sale?'sale':p.badge==='new'?'new-b':''}">${badgeLbl}</div>`:(p.sale?`<div class="p-badge sale">${t.badges.sale}</div>`:'');
     const imgs=(p.images||[]).filter(Boolean);
     const imgHtml=imgs.length>0
-      ?`<img src="${imgs[0]}" alt="${pName(p)}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.style.display='none'">`
+      ?`<img src="${imgs[0]}" alt="${pName(p)}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.style.display='none'">${imgs[1]?`<img src="${imgs[1]}" alt="${pName(p)}" class="p-img-hover" loading="lazy" onerror="this.style.display='none'">`:''}`
       :`<div class="p-ico">${ic(CATI[catIdx]||'gem',52)}</div>`;
-    const multiCount=imgs.length>1?`<span style="position:absolute;bottom:8px;right:38px;background:rgba(30,26,28,.5);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:6px;backdrop-filter:blur(4px);letter-spacing:.3px">${imgs.length}</span>`:'';
-    return`<div class="p-card reveal" onclick="openProduct(${p.id})">
-      <div class="p-img">${imgHtml}${badgeHtml}${multiCount}<button class="qadd" onclick="event.stopPropagation();quickAdd(${p.id})">${ic('plus',13)}</button></div>
+    const dp=p.sale||p.price;
+    const badge=p.badge==='new'?`<span class="p-badge new-b">${t.badges.new}</span>`:p.badge==='top'?`<span class="p-badge">${t.badges.top}</span>`:p.sale?`<span class="p-badge sale">${t.badges.sale}</span>`:'';
+    const bundleBadge=p.bundle&&p.bundle.active?`<span style="position:absolute;bottom:8px;left:8px;background:var(--rose-deep);color:#fff;font-size:8px;font-weight:800;padding:2px 7px;border-radius:7px">${p.bundle.count}×PROMO</span>`:'';
+    return`<div class="p-card reveal" onclick="openProd(${p.id})">
+      <div class="p-img">${imgHtml}${badge}${bundleBadge}
+        <button class="qadd" onclick="event.stopPropagation();quickAdd(${p.id})" aria-label="Agregar">${ic('plus',14)}</button>
+      </div>
       <div class="p-info">
         <p class="p-name">${pName(p)}</p>
         <p class="p-mat">${pMat(p)}</p>
         <div class="p-stars">${starsHTML(p.stars)}</div>
         <div class="p-prow">
-          <span class="p-price${p.sale||S.discount?' sp':''}">${fmt(dp)}</span>
+          <span class="p-price${p.sale?' sp':''}">${fmt(dp)}</span>
           ${p.sale?`<span class="p-og">${fmt(p.price)}</span>`:''}
+          ${p.bundle&&p.bundle.active?`<span style="font-size:9px;color:var(--rose-deep);font-weight:700">${p.bundle.count}×${fmt(p.bundle.price)}</span>`:''}
         </div>
       </div>
     </div>`;
-  }).join('');
-  revealAll();
+  }
+
+  const emptyHtml=`<div class="empty-state" style="grid-column:1/-1"><p>${t.emptyState||'Sin productos'}</p></div>`;
+
+  if(topGrid){
+    topGrid.innerHTML=topProds.length?topProds.map(cardHtml).join(''):emptyHtml;
+    topGrid.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+  }
+  if(botGrid){
+    botGrid.innerHTML=botProds.length?botProds.map(cardHtml).join(''):'';
+    botGrid.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+  }
+
+  // Sale mini strip
+  const saleProds=S.products.filter(p=>p.sale);
+  const saleMini=document.getElementById('saleMini');
+  if(saleMini){
+    saleMini.innerHTML=saleProds.slice(0,5).map(p=>{
+      const imgs=(p.images||[]).filter(Boolean);
+      return`<div style="flex-shrink:0;width:90px;border-radius:10px;overflow:hidden;background:rgba(255,255,255,.07);cursor:pointer" onclick="openProd(${p.id})">
+        ${imgs[0]?`<img src="${imgs[0]}" style="width:90px;height:70px;object-fit:cover;display:block" loading="lazy">`:`<div style="width:90px;height:70px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.2)">${ic('gem',28)}</div>`}
+        <div style="padding:5px 6px">
+          <p style="font-size:9.5px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${pName(p)}</p>
+          <p style="font-size:11px;color:var(--mid)">
+            <span style="font-size:11px;color:var(--gold);font-weight:700">${fmt(p.sale)}</span>
+          </p>
+        </div>
+      </div>`;
+    }).join('');
+  }
 }
 
 function renderSaleMini(){
@@ -1556,21 +1819,35 @@ function filterCat(cat){
   S.currentCat=cat;
   const t=tx();
   document.getElementById('catLbl').textContent=t.cats[CATS.indexOf(cat)]||t.cats[0];
-  document.querySelectorAll('.cat-pill').forEach((b,i)=>{b.classList.toggle('active',CATS[i]===cat);b.classList.toggle('sale-p',CATS[i]==='rebajas');});
   renderProducts();
-  document.querySelector('.cat-wrap').scrollIntoView({behavior:'smooth',block:'nearest'});
-  renderPhotoMenu();
+  renderCatMenu();
+  // Scroll suavemente a la sección de productos
+  setTimeout(()=>{
+    const target=document.getElementById('secHdAnchor')||document.getElementById('prodGridTop');
+    if(target){
+      const y=target.getBoundingClientRect().top+window.scrollY-70;
+      window.scrollTo({top:y,behavior:'smooth'});
+    }
+  },80);
 }
 
 function filterMat(mat){
   S.matFilter=mat;
   document.querySelectorAll('.mat-pill').forEach((b,i)=>b.classList.toggle('active',MATS[i]===mat));
   renderProducts();
+  setTimeout(()=>{
+    const target=document.getElementById('prodGridTop');
+    if(target){
+      const y=target.getBoundingClientRect().top+window.scrollY-70;
+      window.scrollTo({top:y,behavior:'smooth'});
+    }
+  },80);
 }
 
 // ══════════════════════════════════════════════════
 // PRODUCT MODAL
 // ══════════════════════════════════════════════════
+function openProd(id){return openProduct(id);}
 function openProduct(id){
   const p=S.products.find(x=>x.id===id);if(!p)return;
   S.currentProduct=p;
@@ -1879,7 +2156,7 @@ function checkPw(){
 // ADMIN
 // ══════════════════════════════════════════════════
 function openAdmin(){
-  renderAdmProdList();renderCodeList();renderBannerList();renderMenuPhotoAdmin();
+  renderAdmProdList();renderCodeList();renderBannerList();openCatMenuAdmin();renderRtbAdmin();openEditorialAdmin();
   document.getElementById('waInput').value=S.wa;
   document.getElementById('featInput').value=S.featured.join(',');
   // Start with one empty image input for new products
@@ -2429,6 +2706,9 @@ function loadState(){
     if(d.featured)S.featured=d.featured;
     if(d.customBanners)S.customBanners=d.customBanners;
     if(d.menuPhotos)S.menuPhotos=d.menuPhotos;
+    if(d.editorial)S.editorial=d.editorial;
+    if(d.catMenu)S.catMenu=d.catMenu;
+    if(d.rtbanner)S.rtbanner=d.rtbanner;
     console.log('[STR] Estado cargado de localStorage ✓');
   }catch(e){console.warn('[STR] Error al cargar estado:',e);}
 }
@@ -2443,7 +2723,10 @@ function persistState(){
       codes:S.codes,
       featured:S.featured,
       customBanners:S.customBanners||[],
-      menuPhotos:S.menuPhotos||{}
+      menuPhotos:S.menuPhotos||{},
+      editorial:S.editorial,
+      catMenu:S.catMenu,
+      rtbanner:S.rtbanner
     }));
   }catch(e){console.warn('[STR] Error al guardar estado:',e);}
 }
@@ -2503,28 +2786,7 @@ function resetGalIdle(){
 // ══════════════════════════════════════════════════
 // PHOTO MENU — menú visual con fotos de categorías
 // ══════════════════════════════════════════════════
-function renderPhotoMenu(){
-  const t=tx();
-  const scroll=document.getElementById('photoMenuScroll');
-  if(!scroll)return;
-  // Categories para el menú (excluye "rebajas" si no hay sale)
-  const menuCats=CATS.slice(0,6);
-  const menuLabels=t.cats.slice(0,6);
-  const photos=S.menuPhotos||{};
-  scroll.innerHTML=menuCats.map((cat,i)=>{
-    const photo=photos[cat]||'';
-    const active=S.currentCat===cat;
-    return`<div class="photo-menu-item${active?' active':''}" onclick="filterCat('${cat}');document.getElementById('prodGrid').scrollIntoView({behavior:'smooth',block:'nearest'})">
-      <div class="photo-menu-img">
-        ${photo
-          ?`<img src="${photo}" alt="${menuLabels[i]}" onerror="this.style.display='none'">`
-          :`<span style="color:rgba(154,79,109,.3)">${ic(CATI[i],26)}</span>`
-        }
-      </div>
-      <span class="photo-menu-lbl">${menuLabels[i]}</span>
-    </div>`;
-  }).join('');
-}
+
 
 function renderMenuPhotoAdmin(){
   const t=tx();
@@ -2555,20 +2817,299 @@ function setMenuPhoto(cat,url){
 
 function saveMenuPhotos(){
   persistState();
-  renderPhotoMenu();
+  renderCatMenu();
   showToast('Menú de fotos guardado ✓');
 }
+
+
+function renderEditorialBanner(){
+  const ed=S.editorial||{};
+  const banner=document.getElementById('editorialBanner');
+  if(!banner)return;
+  if(ed.active===false){banner.style.display='none';return;}
+  banner.style.display='';
+  const badgeEl=document.getElementById('edBadge');
+  const titleEl=document.getElementById('edTitle');
+  const subEl=document.getElementById('edSub');
+  const btnEl=document.getElementById('edBtn');
+  const imgEl=document.getElementById('edImg');
+  if(badgeEl)badgeEl.innerHTML=ic('sparkle',9,'var(--dark)')+'&nbsp;'+(ed.badge||'NUEVA COLECCIÓN');
+  if(titleEl)titleEl.innerHTML=titleToHtml(ed.title||'Lo nuevo que *te va a encantar*');
+  if(subEl)subEl.textContent=ed.sub||'Piezas recién llegadas esta semana';
+  if(btnEl)btnEl.innerHTML=ic('arrow',12)+'&nbsp;'+(ed.btn||'Ver todo');
+  if(imgEl){imgEl.src=ed.img||'';imgEl.style.display=ed.img?'block':'none';}
+}
+
+function saveEditorial(){
+  S.editorial={
+    active:document.getElementById('edActive')?.checked!==false,
+    badge:document.getElementById('edBadgeIn')?.value||'NUEVA COLECCIÓN',
+    title:document.getElementById('edTitleIn')?.value||'Lo nuevo que *te va a encantar*',
+    sub:document.getElementById('edSubIn')?.value||'',
+    btn:document.getElementById('edBtnIn')?.value||'Ver todo',
+    img:document.getElementById('edImgIn')?.value||''
+  };
+  renderEditorialBanner();
+  persistState();
+}
+
+function openEditorialAdmin(){
+  const ed=S.editorial||{};
+  if(document.getElementById('edActive'))document.getElementById('edActive').checked=ed.active!==false;
+  if(document.getElementById('edBadgeIn'))document.getElementById('edBadgeIn').value=ed.badge||'';
+  if(document.getElementById('edTitleIn'))document.getElementById('edTitleIn').value=ed.title||'';
+  if(document.getElementById('edSubIn'))document.getElementById('edSubIn').value=ed.sub||'';
+  if(document.getElementById('edBtnIn'))document.getElementById('edBtnIn').value=ed.btn||'';
+  if(document.getElementById('edImgIn'))document.getElementById('edImgIn').value=ed.img||'';
+}
+
+// ── FLOATING SCROLL SHOWCASE ──
+let ssCur=0,ssHidden=false,ssTimer=null;
+
+function buildShowcase(){
+  const prods=S.products.filter(p=>p.images&&p.images.length>0);
+  if(prods.length<2){hideShowcase();return;}
+  renderShowcaseSlide(prods,ssCur);
+  const dots=document.getElementById('ssDots');
+  if(dots)dots.innerHTML=prods.map((_,i)=>`<button class="ss-dot${i===0?' on':''}" onclick="ssGoTo(${i})"></button>`).join('');
+  startSsTimer(prods);
+}
+
+function renderShowcaseSlide(prods,idx){
+  const p=prods[idx];
+  if(!p)return;
+  const wrap=document.getElementById('ssImgWrap');
+  if(!wrap)return;
+  if(p.images&&p.images[0]){
+    wrap.innerHTML=`<img class="ss-img" src="${p.images[0]}" alt="${pName(p)}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=ss-img-ph>${ic('gem',30).replace(/"/g,"'")}</div>'">`;
+  }else{
+    wrap.innerHTML=`<div class="ss-img-ph">${ic(CATI[CATS.indexOf(p.cat)]||0,30)}</div>`;
+  }
+  const nm=document.getElementById('ssName');
+  const pr=document.getElementById('ssPrice');
+  if(nm)nm.textContent=pName(p);
+  if(pr)pr.textContent=fmt(p.sale||p.price);
+  // Make card open product
+  const card=document.getElementById('ssCard');
+  if(card)card.onclick=(e)=>{if(e.target.closest('.ss-close'))return;openProd(p.id);};
+}
+
+function startSsTimer(prods){
+  clearInterval(ssTimer);
+  ssTimer=setInterval(()=>{
+    ssCur=(ssCur+1)%prods.length;
+    renderShowcaseSlide(prods,ssCur);
+    document.querySelectorAll('.ss-dot').forEach((d,i)=>d.classList.toggle('on',i===ssCur));
+  },3200);
+}
+
+function ssGoTo(i){
+  const prods=S.products.filter(p=>p.images&&p.images.length>0);
+  ssCur=i;renderShowcaseSlide(prods,i);
+  document.querySelectorAll('.ss-dot').forEach((d,j)=>d.classList.toggle('on',j===i));
+}
+
+function hideShowcase(){ssHidden=true;const el=document.getElementById('scrollShowcase');if(el)el.classList.remove('visible');}
+
+function initScrollShowcase(){
+  const el=document.getElementById('scrollShowcase');
+  const close=document.getElementById('ssClose');
+  if(close)close.innerHTML=ic('x',9);
+  const tap=document.getElementById('ssTap');
+  if(tap)tap.textContent='Toca para ver →';
+  let shown=false;
+  window.addEventListener('scroll',()=>{
+    if(ssHidden||!el)return;
+    const sy=window.scrollY;
+    const heroH=document.getElementById('heroWrap')?.offsetHeight||300;
+    if(sy>heroH*0.6&&!shown){
+      shown=true;
+      el.classList.add('visible');
+      buildShowcase();
+    }else if(sy<80&&shown){
+      shown=false;
+      el.classList.remove('visible');
+    }
+  },{passive:true});
+}
+
+
+
+
+// ── CAT MENU ──
+function renderCatMenu(){
+  const grid=document.getElementById('catmenuGrid');
+  if(!grid)return;
+  const cm=S.catMenu||{};
+  const banner=cm.banner||{};
+  const items=cm.items||[];
+
+  // Banner
+  const bannerHtml=`<div class="catmenu-banner" onclick="filterCat('${banner.cat||'todo'}')">
+    ${banner.img?`<img class="catmenu-banner-bg" src="${banner.img}" alt="" onerror="this.style.display='none'">`:''}
+    <div class="catmenu-banner-overlay"></div>
+    <div class="catmenu-banner-content">
+      <p class="catmenu-banner-eyebrow">${banner.eye||'DESTACADO'}</p>
+      <h3 class="catmenu-banner-title">${titleToHtml(banner.title||'Nuestra *colección*')}</h3>
+      <p class="catmenu-banner-sub">${banner.sub||''}</p>
+    </div>
+  </div>`;
+
+  // 6 items
+  const itemsHtml=items.slice(0,6).map((item,i)=>{
+    const active=S.currentCat===item.cat;
+    return`<div class="catmenu-item${active?' active':''}" onclick="filterCat('${item.cat||'todo'}');document.getElementById('prodGridTop').scrollIntoView({behavior:'smooth',block:'nearest'})">
+      ${item.img?`<img class="catmenu-item-bg" src="${item.img}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'">`:`<div class="catmenu-item-ico">${ic(CATI[CATS.indexOf(item.cat||'todo')]||0,28)}</div>`}
+      <div class="catmenu-item-overlay"></div>
+      <div class="catmenu-item-lbl"><span class="catmenu-item-name">${item.name||''}</span></div>
+    </div>`;
+  }).join('');
+
+  grid.innerHTML=bannerHtml+itemsHtml;
+}
+
+function renderCmItemsAdmin(){
+  const el=document.getElementById('cmItemsList');
+  if(!el)return;
+  const items=(S.catMenu&&S.catMenu.items)||[];
+  const cats=['todo','aretes','collares','pulseras','anillos','sets','rebajas'];
+  const catNames=['Todo','Aretes','Collares','Pulseras','Anillos','Sets','Rebajas'];
+  el.innerHTML=items.slice(0,6).map((item,i)=>`
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:6px">
+      <p style="font-size:10px;font-weight:700;color:var(--mid);margin-bottom:7px;text-transform:uppercase;letter-spacing:.8px">Cuadro ${i+1}</p>
+      <div class="a-row">
+        <div class="a-f"><label>Nombre</label><input type="text" value="${item.name||''}" onchange="S.catMenu.items[${i}].name=this.value" placeholder="Aretes"></div>
+        <div class="a-f"><label>Categoría</label>
+          <select onchange="S.catMenu.items[${i}].cat=this.value">
+            ${cats.map((c,j)=>`<option value="${c}"${item.cat===c?' selected':''}>${catNames[j]}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="a-f"><label>URL de foto</label><input type="url" value="${item.img||''}" onchange="S.catMenu.items[${i}].img=this.value" placeholder="https://..."></div>
+    </div>`).join('')+'<button class="btn-save" onclick="saveCatMenu()">Guardar cuadros</button>';
+}
+
+function saveCatMenu(){
+  if(!S.catMenu)S.catMenu={banner:{},items:[]};
+  S.catMenu.banner={
+    eye:document.getElementById('cmBannerEye')?.value||'',
+    title:document.getElementById('cmBannerTitle')?.value||'',
+    sub:document.getElementById('cmBannerSub')?.value||'',
+    img:document.getElementById('cmBannerImg')?.value||'',
+    cat:document.getElementById('cmBannerCat')?.value||'todo'
+  };
+  persistState();
+  renderCatMenu();
+  showToast('Menú guardado ✓');
+}
+
+function openCatMenuAdmin(){
+  const b=S.catMenu?.banner||{};
+  if(document.getElementById('cmBannerEye'))document.getElementById('cmBannerEye').value=b.eye||'';
+  if(document.getElementById('cmBannerTitle'))document.getElementById('cmBannerTitle').value=b.title||'';
+  if(document.getElementById('cmBannerSub'))document.getElementById('cmBannerSub').value=b.sub||'';
+  if(document.getElementById('cmBannerImg'))document.getElementById('cmBannerImg').value=b.img||'';
+  if(document.getElementById('cmBannerCat'))document.getElementById('cmBannerCat').value=b.cat||'todo';
+  renderCmItemsAdmin();
+}
+
+
+
+// ── ROTATING BANNER ──
+let rtbTimer=null,rtbCur=0;
+
+function renderRtbanner(){
+  const wrap=document.getElementById('rtbannerWrap');
+  if(!wrap)return;
+  const rtb=S.rtbanner||{};
+  if(rtb.active===false){wrap.style.display='none';return;}
+  wrap.style.display='';
+  const msgs=rtb.messages||[];
+  if(!msgs.length){wrap.style.display='none';return;}
+
+  wrap.innerHTML=msgs.map((m,i)=>`
+    <div class="rtbanner-slide${i===0?' active':''}" id="rtbSlide${i}">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1E1A1C,#7A3558)"></div>
+      ${m.img?`<img class="rtbanner-bg" src="${m.img}" alt="" loading="lazy" onerror="this.style.display='none'">`:''}
+      <div class="rtbanner-overlay" style="background:rgba(30,26,28,.4)"></div>
+      <div class="rtbanner-content">
+        <p class="rtbanner-msg">${titleToHtml(m.text||'')}</p>
+      </div>
+    </div>`).join('')+
+    `<div class="rtbanner-dots">${msgs.map((_,i)=>`<button class="rtbanner-dot${i===0?' on':''}" onclick="rtbGoTo(${i})"></button>`).join('')}</div>`;
+
+  startRtbTimer(msgs.length,rtb.speed||4);
+}
+
+function startRtbTimer(total,secs){
+  clearInterval(rtbTimer);
+  if(total<2)return;
+  rtbTimer=setInterval(()=>rtbGoTo((rtbCur+1)%total),secs*1000);
+}
+
+function rtbGoTo(idx){
+  const old=document.getElementById('rtbSlide'+rtbCur);
+  if(old)old.classList.remove('active');
+  rtbCur=idx;
+  const next=document.getElementById('rtbSlide'+rtbCur);
+  if(next)next.classList.add('active');
+  document.querySelectorAll('.rtbanner-dot').forEach((d,i)=>d.classList.toggle('on',i===rtbCur));
+}
+
+function renderRtbAdmin(){
+  const rtb=S.rtbanner||{};
+  if(document.getElementById('rtbActive'))document.getElementById('rtbActive').checked=rtb.active!==false;
+  if(document.getElementById('rtbSpeed'))document.getElementById('rtbSpeed').value=rtb.speed||4;
+  const list=document.getElementById('rtbMsgList');
+  if(!list)return;
+  const msgs=rtb.messages||[];
+  list.innerHTML=msgs.map((m,i)=>`
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:10px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+        <span style="font-size:10px;font-weight:700;color:var(--mid)">Mensaje ${i+1}</span>
+        <button class="code-del" onclick="delRtbMsg(${i})">${ic('trash',11)}</button>
+      </div>
+      <div class="a-f"><label>Texto (usa *palabra* para énfasis dorado)</label>
+        <input type="text" value="${m.text||''}" onchange="S.rtbanner.messages[${i}].text=this.value" placeholder="Tu mensaje aquí"></div>
+      <div class="a-f"><label>URL foto de fondo (opcional)</label>
+        <input type="url" value="${m.img||''}" onchange="S.rtbanner.messages[${i}].img=this.value" placeholder="https://..."></div>
+    </div>`).join('');
+}
+
+function addRtbMsg(){
+  if(!S.rtbanner)S.rtbanner={active:true,speed:4,messages:[]};
+  S.rtbanner.messages.push({text:'',img:''});
+  renderRtbAdmin();
+}
+
+function delRtbMsg(i){
+  S.rtbanner.messages.splice(i,1);
+  renderRtbAdmin();
+}
+
+function saveRtbanner(){
+  if(!S.rtbanner)S.rtbanner={};
+  S.rtbanner.active=document.getElementById('rtbActive')?.checked!==false;
+  S.rtbanner.speed=parseInt(document.getElementById('rtbSpeed')?.value)||4;
+  persistState();
+  renderRtbanner();
+  showToast('Banner guardado ✓');
+}
+
 
 // INIT
 document.addEventListener('DOMContentLoaded',()=>{
   loadState();
   if(!S.menuPhotos)S.menuPhotos={};
   renderPage();
-  renderPhotoMenu();
+  renderCatMenu();
+  renderRtbanner();
   document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
   window.addEventListener('scroll',revealAll,{passive:true});
   revealAll();
   initParallax();
+    renderEditorialBanner();
+  initScrollShowcase();
   // Bundle toggle UI
   const bOn=document.getElementById('pBundleOn');
   if(bOn)bOn.addEventListener('change',()=>{
