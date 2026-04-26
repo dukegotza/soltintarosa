@@ -406,6 +406,42 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
 .sgap{height:22px}
 @media(min-width:481px){body{background:#EDE0E7}}
 @media(max-width:340px){.prod-grid{grid-template-columns:1fr}}
+
+/* PARALLAX */
+.hero-slide img { transform-origin:center center; will-change:transform; transition:transform .1s linear; }
+.hero-slide-wrap { overflow:hidden; }
+
+/* PHOTO MENU (visual category nav) */
+.photo-menu-wrap { max-width:480px; margin:0 auto; padding:14px 0 4px; overflow:hidden; }
+.photo-menu-ttl { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); font-weight:700; padding:0 14px 8px; }
+.photo-menu-scroll { display:flex; gap:10px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding:0 14px 6px; }
+.photo-menu-scroll::-webkit-scrollbar { display:none; }
+.photo-menu-item { flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.photo-menu-img { width:72px; height:72px; border-radius:50%; overflow:hidden; border:2.5px solid var(--border); transition:border-color .2s, transform .2s; background:linear-gradient(140deg,var(--blush-pale),var(--blush)); display:flex; align-items:center; justify-content:center; position:relative; }
+.photo-menu-img img { width:100%; height:100%; object-fit:cover; }
+.photo-menu-item.active .photo-menu-img { border-color:var(--rose-deep); transform:scale(1.07); }
+.photo-menu-lbl { font-size:10px; font-weight:700; color:var(--mid); transition:color .2s; text-align:center; letter-spacing:.2px; white-space:nowrap; }
+.photo-menu-item.active .photo-menu-lbl { color:var(--rose-deep); }
+
+/* BUNDLE PROMO */
+.bundle-tag { background:linear-gradient(135deg,var(--rose-deep),var(--mauve)); color:#fff; font-size:9px; font-weight:800; padding:2px 7px; border-radius:7px; letter-spacing:.4px; display:inline-flex; align-items:center; gap:3px; }
+.bundle-row { background:var(--blush-pale); border:1px solid var(--rose); border-radius:10px; padding:10px 12px; margin-bottom:12px; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.bundle-row-txt { font-size:12px; color:var(--dark); font-weight:600; }
+.bundle-row-price { font-size:15px; font-weight:700; color:var(--rose-deep); }
+
+/* TOGGLE SWITCH */
+.toggle-row { display:flex; align-items:center; justify-content:space-between; padding:7px 0; }
+.toggle-lbl { font-size:12px; font-weight:600; color:var(--dark); }
+.toggle-sw { position:relative; width:40px; height:22px; flex-shrink:0; }
+.toggle-sw input { opacity:0; width:0; height:0; position:absolute; }
+.toggle-slider { position:absolute; cursor:pointer; inset:0; background:var(--border); border-radius:11px; transition:.2s; }
+.toggle-slider::before { content:''; position:absolute; width:16px; height:16px; left:3px; top:3px; background:#fff; border-radius:50%; transition:.2s; }
+.toggle-sw input:checked + .toggle-slider { background:var(--rose-deep); }
+.toggle-sw input:checked + .toggle-slider::before { transform:translateX(18px); }
+
+/* ADMIN SECTION: bundle */
+.bundle-admin { background:var(--blush-pale); border:1px solid var(--border); border-radius:10px; padding:11px; margin-top:6px; }
+.bundle-admin .a-row { margin-top:7px; }
 </style>
 </head>
 <body>
@@ -466,6 +502,13 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
   <button class="hero-arr next" id="heroNext" onclick="heroMove(1)" style="display:none"></button>
   <!-- Dots -->
   <div class="hero-dots" id="heroDots"></div>
+</div>
+
+
+<!-- PHOTO MENU -->
+<div class="photo-menu-wrap reveal" id="photoMenuWrap">
+  <p class="photo-menu-ttl" id="photoMenuTtl">Colecciones</p>
+  <div class="photo-menu-scroll" id="photoMenuScroll"></div>
 </div>
 
 <!-- AI BANNER -->
@@ -578,6 +621,8 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
         <div id="completeLookGrid" style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px"></div>
       </div>
     </div><!-- end m-body -->
+    <!-- Bundle promo row -->
+    <div class="bundle-row" id="bundlePromoRow" style="margin:0 17px 8px;display:none"></div>
     <div class="m-cta">
       <p class="cta-lbl" id="ctaLbl"></p>
       <a class="btn-wa" id="btnWA" href="#" target="_blank"><span id="waIco"></span><span id="btnWALbl"></span></a>
@@ -715,6 +760,32 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
           <div class="a-f"><label id="aPSzLbl"></label><input type="text" id="pSize" placeholder="3 cm largo"></div>
           <div class="a-f"><label id="aPWLbl"></label><input type="text" id="pWeight" placeholder="4g"></div>
         </div>
+        
+        <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:10px 13px;margin-bottom:8px">
+          <p style="font-size:9.5px;color:var(--gold);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">Mostrar en ficha del producto</p>
+          <div class="toggle-row">
+            <span class="toggle-lbl">Mostrar talla/tamaño</span>
+            <label class="toggle-sw"><input type="checkbox" id="pShowSize" checked><span class="toggle-slider"></span></label>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-lbl">Mostrar peso</span>
+            <label class="toggle-sw"><input type="checkbox" id="pShowWeight" checked><span class="toggle-slider"></span></label>
+          </div>
+        </div>
+        <div class="bundle-admin" id="bundleAdmin">
+          <div class="toggle-row" style="padding:0 0 7px">
+            <p style="font-size:9.5px;color:var(--rose-deep);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:0">Promoción 2x1 / paquete</p>
+            <label class="toggle-sw"><input type="checkbox" id="pBundleOn"><span class="toggle-slider"></span></label>
+          </div>
+          <div id="bundleFields" style="display:none">
+            <div class="a-row">
+              <div class="a-f"><label>Cantidad del paquete</label><input type="number" id="pBundleCount" placeholder="2" min="2" max="10" value="2"></div>
+              <div class="a-f"><label>Precio del paquete ($)</label><input type="number" id="pBundlePrice" placeholder="350"></div>
+            </div>
+            <p style="font-size:10.5px;color:var(--mid);margin-top:2px;font-weight:500">Ej: 2 piezas por $350 (precio unitario $190)</p>
+          </div>
+        </div>
+
         <div class="a-f"><label id="aPBLbl"></label>
           <select id="pBadge">
             <option value="" id="oBadge0"></option>
@@ -749,6 +820,12 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
         <p class="a-sec-ttl" id="aWATtl"></p>
         <div class="a-f"><label id="aWALbl"></label><input type="text" id="waInput" placeholder="521XXXXXXXXXX"></div>
         <button class="btn-save" id="aWABtn" onclick="saveWA()"></button>
+      </div>
+
+      <div class="a-sec">
+        <p class="a-sec-ttl" id="aMenuTtl">Menú visual de fotos</p>
+        <p style="font-size:12px;color:var(--mid);margin-bottom:10px;line-height:1.5">Agrega una foto para cada categoría del menú. Los clientes pueden tocarlas para filtrar.</p>
+        <div id="menuPhotoList"></div>
       </div>
       <div class="a-sec">
         <p class="a-sec-ttl" id="aPwTtl"></p>
@@ -1482,6 +1559,7 @@ function filterCat(cat){
   document.querySelectorAll('.cat-pill').forEach((b,i)=>{b.classList.toggle('active',CATS[i]===cat);b.classList.toggle('sale-p',CATS[i]==='rebajas');});
   renderProducts();
   document.querySelector('.cat-wrap').scrollIntoView({behavior:'smooth',block:'nearest'});
+  renderPhotoMenu();
 }
 
 function filterMat(mat){
@@ -1513,6 +1591,9 @@ function openProduct(id){
 
   const si=['gem','ruler','weight','diamond'];
   document.getElementById('specsGrid').innerHTML=t.specLbls.map((lbl,i)=>{
+    // Respect show/hide toggles
+    if(i===1&&p.showSize===false)return'';
+    if(i===2&&p.showWeight===false)return'';
     let val=i===0?pMat(p):i===1?p.size:i===2?p.weight:t.premium;
     if(i===1&&val){
       // Translate jewelry terms
@@ -1524,6 +1605,7 @@ function openProduct(id){
       // Convert cm → inches alongside
       val=val.replace(/(\d+(?:\.\d+)?)\s*cm/g,(_,n)=>`${n} cm / ${(parseFloat(n)/2.54).toFixed(1)} in`);
     }
+    if(!val&&i>0)return'';
     return`<div class="spec-c"><div class="spec-ico">${ic(si[i],16)}</div><div><p class="spec-lbl">${lbl}</p><p class="spec-val">${val}</p></div></div>`;
   }).join('');
 
@@ -1555,6 +1637,23 @@ function openProduct(id){
     }
   }catch(e){console.warn('Complete look:',e);}
 
+  // Bundle promo display
+  const bundleEl=document.getElementById('bundlePromoRow');
+  if(bundleEl){
+    if(p.bundle&&p.bundle.active){
+      bundleEl.style.display='flex';
+      bundleEl.innerHTML=`
+        <div>
+          <span class="bundle-tag">${ic('sparkle',10,'#fff')} PROMO</span>
+          <span class="bundle-row-txt" style="margin-left:6px">
+            1 pieza ${fmt(p.price)} · <strong>${p.bundle.count} por</strong>
+          </span>
+        </div>
+        <span class="bundle-row-price">${fmt(p.bundle.price)}</span>`;
+    }else{
+      bundleEl.style.display='none';
+    }
+  }
   document.getElementById('ctaLbl').innerHTML=`<strong>${fmt(dp)}</strong>${S.discount&&qty<DLIMIT?`&nbsp;·&nbsp;<span style="color:#3A7A4A;font-size:11px">${S.discount} ✓</span>`:''}`;
   document.getElementById('btnWA').href=`https://wa.me/${S.wa}?text=${encodeURIComponent(t.waMsg(pName(p),pMat(p),fmt(dp),S.discount))}`;
   document.getElementById('btnWALbl').textContent=t.btnWA;
@@ -1562,12 +1661,13 @@ function openProduct(id){
 
   document.getElementById('prodOvl').classList.add('open');
   document.body.style.overflow='hidden';
+  setTimeout(startGalIdle,1000);
 
   // Track view for AI
   if(!viewHistory.includes(id))viewHistory.push(id);
   if(viewHistory.length>=3&&!aiTriggered){aiTriggered=true;setTimeout(fetchAIReco,1800);}
 }
-function closeProd(){document.getElementById('prodOvl').classList.remove('open');document.body.style.overflow='';}
+function closeProd(){clearTimeout(galIdleTimer);document.getElementById('prodOvl').classList.remove('open');document.body.style.overflow='';}
 function closeProdOut(e){if(e.target===document.getElementById('prodOvl'))closeProd();}
 
 // ══════════════════════════════════════════════════
@@ -1616,7 +1716,19 @@ function removeItem(idx){S.cart.splice(idx,1);updateCartUI();}
 
 function calcTotal(){
   let rem=DLIMIT,tot=0;
-  S.cart.forEach(item=>{const base=item.sale||item.price,disc=S.discount?base*(1-S.discountPct/100):base;for(let i=0;i<item.qty;i++){tot+=(S.discount&&rem>0)?disc:base;rem--;}});
+  S.cart.forEach(item=>{
+    const base=item.sale||item.price;
+    // Bundle promo
+    if(item.bundle&&item.bundle.active&&item.qty>=item.bundle.count){
+      const pairs=Math.floor(item.qty/item.bundle.count);
+      const singles=item.qty%item.bundle.count;
+      const bundlePriceUnit=item.bundle.price; // total for bundle.count units
+      tot+=pairs*bundlePriceUnit+singles*base;
+      return;
+    }
+    const disc=S.discount?base*(1-S.discountPct/100):base;
+    for(let i=0;i<item.qty;i++){tot+=(S.discount&&rem>0)?disc:base;rem--;}
+  });
   return tot;
 }
 
@@ -1632,16 +1744,28 @@ function updateCartUI(){
     items.innerHTML=S.cart.map((item,idx)=>{
       const orig=item.price;
       const base=item.sale||item.price;
-      const discUnits=S.discount?Math.min(item.qty,Math.max(0,rem)):0;
-      rem-=discUnits;
-      const discPrice=base*(1-S.discountPct/100);
-      const lineTotal=discUnits*discPrice+(item.qty-discUnits)*base;
-      const origTotal=orig*item.qty;
-      const saved=Math.round((origTotal-lineTotal)*100)/100;
-      const hasDiscount=S.discount&&discUnits>0;
-      const hasSale=!!item.sale;
-      const showStrike=hasDiscount||hasSale;
-      const showSavings=hasDiscount&&qty>1&&saved>0.5;
+      // Bundle?
+      let bundleApplied=false;
+      if(item.bundle&&item.bundle.active&&item.qty>=item.bundle.count){bundleApplied=true;}
+      let lineTotal,origTotal,saved,showStrike,showSavings;
+      origTotal=orig*item.qty;
+      if(bundleApplied){
+        const pairs=Math.floor(item.qty/item.bundle.count);
+        const singles=item.qty%item.bundle.count;
+        lineTotal=pairs*item.bundle.price+singles*base;
+        saved=Math.round((origTotal-lineTotal)*100)/100;
+        showStrike=true;showSavings=saved>0.5;
+      }else{
+        const discUnits=S.discount?Math.min(item.qty,Math.max(0,rem)):0;
+        rem-=discUnits;
+        const discPrice=base*(1-S.discountPct/100);
+        lineTotal=discUnits*discPrice+(item.qty-discUnits)*base;
+        saved=Math.round((origTotal-lineTotal)*100)/100;
+        const hasDiscount=S.discount&&discUnits>0;
+        const hasSale=!!item.sale;
+        showStrike=hasDiscount||hasSale;
+        showSavings=hasDiscount&&qty>1&&saved>0.5;
+      }
       return`<div class="c-item">
         <div class="ci-img">${ic(CATI[CATS.indexOf(item.cat)]||'gem',24)}</div>
         <div class="ci-info">
@@ -1755,7 +1879,7 @@ function checkPw(){
 // ADMIN
 // ══════════════════════════════════════════════════
 function openAdmin(){
-  renderAdmProdList();renderCodeList();renderBannerList();
+  renderAdmProdList();renderCodeList();renderBannerList();renderMenuPhotoAdmin();
   document.getElementById('waInput').value=S.wa;
   document.getElementById('featInput').value=S.featured.join(',');
   // Start with one empty image input for new products
@@ -1794,6 +1918,17 @@ function editProd(id){
   document.getElementById('pWeight').value=p.weight;
   document.getElementById('pBadge').value=p.badge||'';
   document.getElementById('pCare').value=pCare(p).join('\n');
+  if(document.getElementById('pShowSize'))document.getElementById('pShowSize').checked=p.showSize!==false;
+  if(document.getElementById('pShowWeight'))document.getElementById('pShowWeight').checked=p.showWeight!==false;
+  const hasBun=p.bundle&&p.bundle.active;
+  if(document.getElementById('pBundleOn')){
+    document.getElementById('pBundleOn').checked=!!hasBun;
+    document.getElementById('bundleFields').style.display=hasBun?'block':'none';
+    if(hasBun){
+      document.getElementById('pBundleCount').value=p.bundle.count||2;
+      document.getElementById('pBundlePrice').value=p.bundle.price||'';
+    }
+  }
   // Load images
   const imgs=(p.images||[]).filter(Boolean);
   document.getElementById('imgInputsList').innerHTML='';
@@ -1804,7 +1939,7 @@ function editProd(id){
 }
 function delProd(id){
   if(!confirm('¿Eliminar este producto?'))return;
-  S.products=S.products.filter(x=>x.id!==id);renderAdmProdList();renderPage();showToast(tx().deletedMsg);
+  S.products=S.products.filter(x=>x.id!==id);persistState();renderAdmProdList();renderPage();showToast(tx().deletedMsg);
 }
 function clearForm(){
   document.getElementById('ePid').value='';
@@ -1813,6 +1948,9 @@ function clearForm(){
   document.getElementById('imgInputsList').innerHTML='';
   addImgInput();
   updateImgPreview();
+  if(document.getElementById('pShowSize'))document.getElementById('pShowSize').checked=true;
+  if(document.getElementById('pShowWeight'))document.getElementById('pShowWeight').checked=true;
+  if(document.getElementById('pBundleOn')){document.getElementById('pBundleOn').checked=false;document.getElementById('bundleFields').style.display='none';}
 }
 async function saveProduct(){
   const id=document.getElementById('ePid').value;
@@ -1829,6 +1967,9 @@ async function saveProduct(){
   saveBtn.disabled=true;
 
   // Build product with Spanish as base
+  const bundleOn=document.getElementById('pBundleOn')?.checked||false;
+  const bundleCount=parseInt(document.getElementById('pBundleCount')?.value)||2;
+  const bundlePrice=parseFloat(document.getElementById('pBundlePrice')?.value)||null;
   const p={
     id:id?parseInt(id):Date.now(),
     names:{es:nm,en:nm,fr:nm},
@@ -1841,7 +1982,10 @@ async function saveProduct(){
     weight:document.getElementById('pWeight').value,
     badge:document.getElementById('pBadge').value,
     care:{es:careEs,en:careEs,fr:careEs},
-    images:imgUrls
+    images:imgUrls,
+    showSize:document.getElementById('pShowSize')?.checked!==false,
+    showWeight:document.getElementById('pShowWeight')?.checked!==false,
+    bundle:bundleOn&&bundlePrice?{count:bundleCount,price:bundlePrice,active:true}:null
   };
 
   // Auto-translate via Claude API
@@ -1884,6 +2028,7 @@ Cuidados: ${careEs.join(' | ')}`;
 
   // Save product
   if(id){const i=S.products.findIndex(x=>x.id===parseInt(id));if(i>-1)S.products[i]=p;}else S.products.unshift(p);
+  persistState();
   clearForm();renderAdmProdList();renderPage();
   showToast((tx().savedWithTranslation)||tx().savedMsg);
 }
@@ -1899,9 +2044,9 @@ function renderCodeList(){
 function addCode(){
   const c=document.getElementById('newCode').value.trim().toUpperCase(),p=parseInt(document.getElementById('newPct').value);
   if(!c||!p)return;S.codes[c]=p;document.getElementById('newCode').value='';document.getElementById('newPct').value='';
-  renderCodeList();showToast(tx().codeAdded(c));
+  renderCodeList();persistState();showToast(tx().codeAdded(c));
 }
-function delCode(c){delete S.codes[c];renderCodeList();showToast(tx().codeDelMsg);}
+function delCode(c){delete S.codes[c];renderCodeList();persistState();showToast(tx().codeDelMsg);}
 
 function renderBannerList(){
   document.getElementById('bannerList').innerHTML=(S.customBanners||[]).map((m,i)=>`
@@ -1910,11 +2055,11 @@ function renderBannerList(){
 function addBanner(){
   const m=document.getElementById('newBanner').value.trim();if(!m)return;
   if(!S.customBanners)S.customBanners=[];S.customBanners.push(m);
-  document.getElementById('newBanner').value='';renderBannerList();rebuildBanner();showToast(tx().bannerAdded);
+  document.getElementById('newBanner').value='';renderBannerList();rebuildBanner();persistState();showToast(tx().bannerAdded);
 }
-function delBanner(i){S.customBanners.splice(i,1);renderBannerList();rebuildBanner();showToast(tx().bannerDel);}
-function saveFeatured(){S.featured=document.getElementById('featInput').value.split(',').map(v=>parseInt(v.trim())).filter(Boolean);renderProducts();showToast(tx().featOk);}
-function saveWA(){S.wa=document.getElementById('waInput').value.trim();showToast(tx().waOk);}
+function delBanner(i){S.customBanners.splice(i,1);renderBannerList();rebuildBanner();persistState();showToast(tx().bannerDel);}
+function saveFeatured(){S.featured=document.getElementById('featInput').value.split(',').map(v=>parseInt(v.trim())).filter(Boolean);renderProducts();persistState();showToast(tx().featOk);}
+function saveWA(){S.wa=document.getElementById('waInput').value.trim();persistState();showToast(tx().waOk);}
 function saveNewPw(){const v=document.getElementById('newPwInp').value.trim();if(!v)return;adminPw=v;localStorage.setItem(ADMIN_KEY,v);document.getElementById('newPwInp').value='';showToast(tx().pwChanged);}
 
 // THEME
@@ -1978,6 +2123,7 @@ function buildGallery(p,catIdx){
   galEl.ontouchend=e=>{
     const dx=e.changedTouches[0].clientX-swX;
     if(Math.abs(dx)>44)galMove(dx<0?1:-1);
+    resetGalIdle();
   };
 }
 
@@ -1989,7 +2135,7 @@ function galSetSlide(n){
   const cnt=document.getElementById('galCount');
   if(cnt)cnt.innerHTML=`${galCur+1}&thinsp;/&thinsp;${galTot}`;
 }
-function galMove(dir){galSetSlide(galCur+dir);}
+function galMove(dir){galSetSlide(galCur+dir);resetGalIdle();}
 
 // ══════════════════════════════════════════════════
 // PHOTO ADMIN HELPERS
@@ -2101,7 +2247,21 @@ function heroMove(dir){heroGo(heroCur+dir);}
 
 function startHeroTimer(count){
   clearInterval(heroTimer);
-  if(count>1)heroTimer=setInterval(()=>heroSetSlide(heroCur+1),4500);
+  if(count<2)return;
+  // Auto-advance hero on scroll idle (3.5s of no scroll activity)
+  let heroScrollTimer=null;
+  const resetOnIdle=()=>{
+    clearInterval(heroTimer);
+    clearTimeout(heroScrollTimer);
+    heroScrollTimer=setTimeout(()=>{
+      heroTimer=setInterval(()=>heroSetSlide(heroCur+1),4000);
+    },3500);
+  };
+  window.removeEventListener('scroll',window._heroScrollHandler);
+  window._heroScrollHandler=resetOnIdle;
+  window.addEventListener('scroll',resetOnIdle,{passive:true});
+  // Start immediately
+  heroTimer=setInterval(()=>heroSetSlide(heroCur+1),4500);
 }
 
 // ══════════════════════════════════════════════════
@@ -2154,6 +2314,7 @@ function delSlide(i){
 
 function saveSlides(){
   buildHeroSlideshow();
+  persistState();
   showToast(tx().savedMsg||'Fotos guardadas');
 }
 
@@ -2231,12 +2392,14 @@ Descripción: ${sub}`;
   document.getElementById('hEye').dataset.dirty='';
 
   S.heroContent=result;
+  persistState();
   renderPage();
   showToast(tx().heroSavedMsg||'Texto actualizado');
 }
 
 function resetHeroContent(){
   S.heroContent=null;
+  persistState();
   document.getElementById('hEye').dataset.dirty='';
   document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active-preset'));
   renderPage();
@@ -2247,12 +2410,170 @@ function resetHeroContent(){
 // KEYBOARD
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeProd();closeNav();closeAdmin();closePwModal();}});
 
+
+// ══════════════════════════════════════════════════
+// PERSISTENCIA EN localStorage
+// ══════════════════════════════════════════════════
+const STATE_KEY='STR_STATE_v3';
+
+function loadState(){
+  try{
+    const raw=localStorage.getItem(STATE_KEY);
+    if(!raw)return;
+    const d=JSON.parse(raw);
+    if(d.products&&d.products.length>0)S.products=d.products;
+    if(d.heroSlides&&d.heroSlides.length>0)S.heroSlides=d.heroSlides;
+    if(d.heroContent)S.heroContent=d.heroContent;
+    if(d.wa)S.wa=d.wa;
+    if(d.codes&&Object.keys(d.codes).length)S.codes=d.codes;
+    if(d.featured)S.featured=d.featured;
+    if(d.customBanners)S.customBanners=d.customBanners;
+    if(d.menuPhotos)S.menuPhotos=d.menuPhotos;
+    console.log('[STR] Estado cargado de localStorage ✓');
+  }catch(e){console.warn('[STR] Error al cargar estado:',e);}
+}
+
+function persistState(){
+  try{
+    localStorage.setItem(STATE_KEY,JSON.stringify({
+      products:S.products,
+      heroSlides:S.heroSlides,
+      heroContent:S.heroContent,
+      wa:S.wa,
+      codes:S.codes,
+      featured:S.featured,
+      customBanners:S.customBanners||[],
+      menuPhotos:S.menuPhotos||{}
+    }));
+  }catch(e){console.warn('[STR] Error al guardar estado:',e);}
+}
+
+// ══════════════════════════════════════════════════
+// PARALLAX — ZOOM OUT en scroll
+// ══════════════════════════════════════════════════
+function initParallax(){
+  let ticking=false;
+  window.addEventListener('scroll',()=>{
+    if(ticking)return;
+    ticking=true;
+    requestAnimationFrame(()=>{
+      const sy=window.scrollY;
+      // Hero images zoom out as user scrolls
+      document.querySelectorAll('.hero-slide img').forEach(img=>{
+        const scale=Math.max(1,1.12-sy*0.00025);
+        img.style.transform=`scale(${scale})`;
+      });
+      // Product card images subtle parallax
+      document.querySelectorAll('.p-img img').forEach(img=>{
+        const rect=img.closest('.p-img')?.getBoundingClientRect();
+        if(!rect)return;
+        const vis=1-(rect.top/window.innerHeight);
+        if(vis>0&&vis<1.5){
+          const scale=Math.max(1,1.05-vis*0.05);
+          img.style.transform=`scale(${scale})`;
+        }
+      });
+      // Hero text subtle float
+      const hcontent=document.querySelector('.hero-slide-content');
+      if(hcontent&&sy<400)hcontent.style.transform=`translateY(${sy*0.12}px)`;
+      ticking=false;
+    });
+  },{passive:true});
+}
+
+// ══════════════════════════════════════════════════
+// GALLERY IDLE — auto-avanza si el cliente se queda
+// ══════════════════════════════════════════════════
+let galIdleTimer=null;
+
+function startGalIdle(){
+  clearTimeout(galIdleTimer);
+  if(galTot<2)return;
+  galIdleTimer=setTimeout(()=>{
+    galMove(1);
+    startGalIdle(); // loop
+  },3500);
+}
+
+function resetGalIdle(){
+  clearTimeout(galIdleTimer);
+  if(galTot>1)startGalIdle();
+}
+
+// ══════════════════════════════════════════════════
+// PHOTO MENU — menú visual con fotos de categorías
+// ══════════════════════════════════════════════════
+function renderPhotoMenu(){
+  const t=tx();
+  const scroll=document.getElementById('photoMenuScroll');
+  if(!scroll)return;
+  // Categories para el menú (excluye "rebajas" si no hay sale)
+  const menuCats=CATS.slice(0,6);
+  const menuLabels=t.cats.slice(0,6);
+  const photos=S.menuPhotos||{};
+  scroll.innerHTML=menuCats.map((cat,i)=>{
+    const photo=photos[cat]||'';
+    const active=S.currentCat===cat;
+    return`<div class="photo-menu-item${active?' active':''}" onclick="filterCat('${cat}');document.getElementById('prodGrid').scrollIntoView({behavior:'smooth',block:'nearest'})">
+      <div class="photo-menu-img">
+        ${photo
+          ?`<img src="${photo}" alt="${menuLabels[i]}" onerror="this.style.display='none'">`
+          :`<span style="color:rgba(154,79,109,.3)">${ic(CATI[i],26)}</span>`
+        }
+      </div>
+      <span class="photo-menu-lbl">${menuLabels[i]}</span>
+    </div>`;
+  }).join('');
+}
+
+function renderMenuPhotoAdmin(){
+  const t=tx();
+  const el=document.getElementById('menuPhotoList');
+  if(!el)return;
+  const menuCats=CATS.slice(0,6);
+  const menuLabels=t.cats.slice(0,6);
+  const photos=S.menuPhotos||{};
+  el.innerHTML=menuCats.map((cat,i)=>`
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">
+      <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid var(--border);flex-shrink:0;background:var(--blush-pale);display:flex;align-items:center;justify-content:center">
+        ${photos[cat]?`<img src="${photos[cat]}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'">`:`<span style="color:rgba(154,79,109,.3)">${ic(CATI[i],16)}</span>`}
+      </div>
+      <div style="flex:1">
+        <p style="font-size:10px;color:var(--mid);font-weight:700;margin-bottom:3px">${menuLabels[i]}</p>
+        <input type="url" placeholder="URL de foto..." value="${photos[cat]||''}"
+          style="width:100%;padding:6px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;font-family:var(--sans);outline:none;color:var(--dark)"
+          onchange="setMenuPhoto('${cat}',this.value)">
+      </div>
+    </div>
+  `).join('')+'<button class="btn-save" style="margin-top:4px" onclick="saveMenuPhotos()">Guardar fotos del menú</button>';
+}
+
+function setMenuPhoto(cat,url){
+  if(!S.menuPhotos)S.menuPhotos={};
+  S.menuPhotos[cat]=url;
+}
+
+function saveMenuPhotos(){
+  persistState();
+  renderPhotoMenu();
+  showToast('Menú de fotos guardado ✓');
+}
+
 // INIT
 document.addEventListener('DOMContentLoaded',()=>{
+  loadState();
+  if(!S.menuPhotos)S.menuPhotos={};
   renderPage();
+  renderPhotoMenu();
   document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
   window.addEventListener('scroll',revealAll,{passive:true});
   revealAll();
+  initParallax();
+  // Bundle toggle UI
+  const bOn=document.getElementById('pBundleOn');
+  if(bOn)bOn.addEventListener('change',()=>{
+    document.getElementById('bundleFields').style.display=bOn.checked?'block':'none';
+  });
 });
 </script>
 </body>
