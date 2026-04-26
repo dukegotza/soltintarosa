@@ -266,6 +266,9 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
 .btn-wa:hover{background:#239C48;transform:translateY(-1px)}
 .btn-wa:active{transform:scale(.97)}
 .btn-add{display:flex;align-items:center;justify-content:center;gap:7px;background:transparent;color:var(--dark);border:1.5px solid var(--border);border-radius:30px;padding:12px;width:100%;font-size:13px;font-weight:600;font-family:var(--sans);cursor:pointer;margin-top:8px;transition:all .2s}
+.btn-ig{display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;border:none;border-radius:30px;padding:14px;width:100%;font-size:14px;font-weight:700;font-family:var(--sans);cursor:pointer;transition:all .2s;text-decoration:none;letter-spacing:.2px;box-shadow:0 4px 14px rgba(188,24,136,.22);margin-top:8px}
+.btn-ig:hover{opacity:.88;transform:translateY(-1px)}
+.btn-ig:active{transform:scale(.97)}
 .btn-add:hover{background:var(--dark);color:#fff;border-color:var(--dark)}
 
 /* CART */
@@ -293,10 +296,13 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
 .cart-lim.on{display:flex}
 .tot-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
 .tot-lbl{font-size:13px;font-weight:300;color:var(--mid)}
-.tot-price{font-family:var(--sans);font-size:22px;font-weight:400}
-.cart-disc{font-size:11.5px;color:#3A7A4A;margin-bottom:11px;font-weight:600;display:none}
+.tot-price{font-family:var(--sans);font-size:26px;font-weight:700;color:#C0392B}
+.cart-disc{font-size:13px;color:#3A7A4A;margin-bottom:11px;font-weight:600;display:none}
 .cart-disc.on{display:block}
 .btn-send{display:flex;align-items:center;justify-content:center;gap:8px;background:#2AB954;color:#fff;border:none;border-radius:30px;padding:14px;width:100%;font-size:14px;font-weight:700;font-family:var(--sans);cursor:pointer;transition:all .2s;box-shadow:0 4px 14px rgba(42,185,84,.18)}
+.btn-send-ig{display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;border:none;border-radius:30px;padding:14px;width:100%;font-size:14px;font-weight:700;font-family:var(--sans);cursor:pointer;transition:all .2s;box-shadow:0 4px 14px rgba(188,24,136,.18);margin-top:8px}
+.btn-send-ig:hover{opacity:.88}
+.btn-send-ig:active{transform:scale(.97)}
 .btn-send:hover{background:#239C48}
 
 /* PW MODAL */
@@ -537,6 +543,33 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
 .catmenu-item-lbl{position:absolute;bottom:0;left:0;right:0;padding:5px 5px 6px;text-align:center}
 .catmenu-item-name{font-size:9.5px;font-weight:800;color:#fff;letter-spacing:.2px;display:block;text-shadow:0 1px 3px rgba(0,0,0,.4)}
 
+
+/* ── CART EXTRAS ── */
+.cart-extras{padding:12px 15px;border-top:1px solid var(--border)}
+.cart-extras-ttl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:9px;display:flex;align-items:center;gap:6px}
+.extra-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:10px;border:1.5px solid var(--border);background:var(--white);margin-bottom:6px;cursor:pointer;transition:border-color .2s,background .2s;position:relative}
+.extra-item.selected{border-color:var(--rose-deep);background:var(--blush-pale)}
+.extra-item.free{border-color:#3A7A4A;background:#F0FFF4}
+.extra-ico{width:32px;height:32px;border-radius:8px;background:var(--blush-pale);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--rose-deep)}
+.extra-item.selected .extra-ico{background:var(--blush);color:var(--rose-deep)}
+.extra-item.free .extra-ico{background:#DCFCE7;color:#3A7A4A}
+.extra-info{flex:1;min-width:0}
+.extra-name{font-size:13px;font-weight:700;color:var(--dark);display:block}
+.extra-desc{font-size:10.5px;color:var(--mid);font-weight:400}
+.extra-price{font-size:13px;font-weight:700;color:var(--dark);flex-shrink:0}
+.extra-price.free-tag{color:#3A7A4A;font-size:11px;font-weight:800;letter-spacing:.5px}
+.extra-check{position:absolute;top:7px;right:7px;width:18px;height:18px;border-radius:50%;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.extra-item.selected .extra-check{background:var(--rose-deep);border-color:var(--rose-deep)}
+.extra-item.free .extra-check{background:#3A7A4A;border-color:#3A7A4A}
+/* Free gift banner */
+.free-gift-banner{max-width:480px;margin:0 auto 0;padding:0 10px}
+.fgb-inner{background:linear-gradient(135deg,#1a4731,#2d6a4f);border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:10px;animation:fadeSlide .5s ease}
+.fgb-ico{color:#52b788;flex-shrink:0}
+.fgb-txt{font-size:12px;font-weight:700;color:#fff;line-height:1.4}
+.fgb-sub{font-size:10.5px;color:rgba(255,255,255,.7);font-weight:400}
+/* Admin extras */
+.extra-admin-item{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:11px;margin-bottom:7px}
+
 </style>
 </head>
 <body>
@@ -598,6 +631,18 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
   <!-- Dots -->
   <div class="hero-dots" id="heroDots"></div>
 
+
+
+<!-- FREE GIFT BANNER -->
+<div class="free-gift-banner" id="freeGiftBanner" style="display:none;margin-top:8px">
+  <div class="fgb-inner">
+    <div class="fgb-ico" id="fgbIco"></div>
+    <div>
+      <p class="fgb-txt" id="fgbTxt"></p>
+      <p class="fgb-sub" id="fgbSub">Se agrega automáticamente a tu pedido</p>
+    </div>
+  </div>
+</div>
 
 <!-- CAT MENU (banner + 6 items) -->
 <div class="catmenu-wrap reveal" id="catmenuWrap">
@@ -743,6 +788,7 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
     <div class="m-cta">
       <p class="cta-lbl" id="ctaLbl"></p>
       <a class="btn-wa" id="btnWA" href="#" target="_blank"><span id="waIco"></span><span id="btnWALbl"></span></a>
+      <a class="btn-ig" id="btnIG" href="#" target="_blank"><span id="igIco"></span><span id="btnIGLbl"></span></a>
       <button class="btn-add" onclick="addFromModal()"><span id="addIco"></span><span id="btnAddLbl"></span></button>
     </div>
   </div>
@@ -762,6 +808,7 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
     </div>
     <div id="cartItems"></div>
   </div>
+  <div class="cart-extras" id="cartExtras" style="display:none"></div>
   <div class="cart-ft">
     <div class="cart-lim" id="cartLim"></div>
     <div class="tot-row">
@@ -769,7 +816,9 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
       <span class="tot-price" id="totPrice"></span>
     </div>
     <p class="cart-disc" id="cartDiscEl"></p>
+    <p id="cartOrigEl" style="font-size:14px;color:#3A7A4A;font-weight:600;margin-bottom:11px;display:none"></p>
     <button class="btn-send" onclick="sendCartWA()"><span id="sendIco"></span><span id="btnSendTxt"></span></button>
+    <button class="btn-send-ig" onclick="sendCartIG()"><span id="sendIgIco"></span><span id="btnSendIgTxt"></span></button>
   </div>
 </div>
 
@@ -936,6 +985,7 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
       <div class="a-sec">
         <p class="a-sec-ttl" id="aWATtl"></p>
         <div class="a-f"><label id="aWALbl"></label><input type="text" id="waInput" placeholder="521XXXXXXXXXX"></div>
+        <div class="a-f"><label>Usuario de Instagram (sin @)</label><input type="text" id="igInput" placeholder="soltintarosa"></div>
         <button class="btn-save" id="aWABtn" onclick="saveWA()"></button>
       </div>
 
@@ -992,6 +1042,12 @@ footer{max-width:480px;margin:26px auto 0;padding:22px 16px 60px;border-top:1px 
         <p class="a-sec-ttl" id="aMenuTtl">Menú visual de fotos</p>
         <p style="font-size:12px;color:var(--mid);margin-bottom:10px;line-height:1.5">Agrega una foto para cada categoría del menú. Los clientes pueden tocarlas para filtrar.</p>
         <div id="menuPhotoList"></div>
+      </div>
+
+      <div class="a-sec">
+        <p class="a-sec-ttl">Extras del pedido</p>
+        <p style="font-size:11.5px;color:var(--mid);margin-bottom:10px;line-height:1.5">Activa los extras que quieres ofrecer. Márcalos como gratis para temporadas especiales.</p>
+        <div id="extrasAdminList"></div>
       </div>
       <div class="a-sec">
         <p class="a-sec-ttl" id="aPwTtl"></p>
@@ -1139,7 +1195,7 @@ const T={
     emptyFilters:'Prueba con otro filtro de material.',
     completeLook:'Completa tu look',
     savings:amt=>`Ahorras ${amt}`,
-    cartSavingsTotal:amt=>`Total ahorrado: ${amt}`,
+    cartSavingsTotal:(saved,total)=>`En vez de pagar ${saved}, tu total es ${total}`,
     aPImgLbl:'Fotos del producto (URLs de imagen)',
     aAddImgBtn:'+ Agregar otra foto',
     aImgPh:'https://ejemplo.com/foto.jpg',
@@ -1238,7 +1294,7 @@ const T={
     emptyFilters:'Try a different material filter.',
     completeLook:'Complete your look',
     savings:amt=>`You save ${amt}`,
-    cartSavingsTotal:amt=>`Total saved: ${amt}`,
+    cartSavingsTotal:(saved,total)=>`Instead of ${saved}, your total is ${total}`,
     aPImgLbl:'Product photos (image URLs)',
     aAddImgBtn:'+ Add another photo',
     aImgPh:'https://example.com/photo.jpg',
@@ -1337,7 +1393,7 @@ const T={
     emptyFilters:'Essayez un autre filtre de matériau.',
     completeLook:'Complétez votre look',
     savings:amt=>`Vous économisez ${amt}`,
-    cartSavingsTotal:amt=>`Total économisé : ${amt}`,
+    cartSavingsTotal:(saved,total)=>`Au lieu de ${saved}, votre total est ${total}`,
     aPImgLbl:'Photos du produit (URLs des images)',
     aAddImgBtn:'+ Ajouter une photo',
     aImgPh:'https://exemple.com/photo.jpg',
@@ -1390,6 +1446,15 @@ const S={
   lang:'es',curr:'MXN',discount:null,discountPct:0,
   cart:[],currentProduct:null,currentCat:'todo',matFilter:'all',
   wa:'521XXXXXXXXXX',
+  ig:'soltintarosa',
+  extras:[
+    {id:'gift_box',    name:'Caja de regalo',      desc:'Empaque especial para regalo',    icon:'box',    price:30, active:false, free:false},
+    {id:'cloth',       name:'Paño limpiador',       desc:'Cuida el brillo de tu joyería',   icon:'sparkle',price:15, active:false, free:false},
+    {id:'special_pkg', name:'Empaque especial',     desc:'Bolsa premium Sol Tinta Rosa',    icon:'bag',    price:20, active:false, free:false},
+    {id:'card',        name:'Tarjeta personalizada',desc:'Mensaje escrito a mano',          icon:'chat',   price:20, active:false, free:false},
+    {id:'tote',        name:'Bolsa de tela',        desc:'Bolsita de tela reutilizable',    icon:'tag',    price:25, active:false, free:false},
+  ],
+  selectedExtras:[],
   heroContent:null,
   catMenu:{
     banner:{eye:'LO MÁS VENDIDO',title:'Lo que más *eligen* nuestras clientas',sub:'Colección completa disponible',img:'',cat:'todo'},
@@ -1600,7 +1665,7 @@ function renderPage(){
   document.getElementById('cartClose').innerHTML=ic('x',14);
   document.getElementById('cartEmptyIco').innerHTML=ic('bag',42,'var(--blush)');
   document.getElementById('cartEmptyP').innerHTML=t.cartEmpty.replace('\n','<br>');
-  document.getElementById('totLbl').textContent=t.cartTotal;
+  document.getElementById('totLbl').textContent='TOTAL';
   document.getElementById('btnSendTxt').textContent=t.btnSend;
   document.getElementById('sendIco').innerHTML=ic('chat',17);
 
@@ -1613,6 +1678,11 @@ function renderPage(){
   document.getElementById('btnAddLbl').textContent=t.btnAdd;
   document.getElementById('waIco').innerHTML=ic('chat',17);
   document.getElementById('addIco').innerHTML=ic('bag',15);
+  if(document.getElementById('btnIGLbl'))document.getElementById('btnIGLbl').textContent='Comprar por Instagram DM';
+  if(document.getElementById('igIco'))document.getElementById('igIco').innerHTML=ic('ig',17);
+  if(document.getElementById('btnIG'))document.getElementById('btnIG').href=S.ig?`https://ig.me/m/${S.ig}`:'https://instagram.com';
+  if(document.getElementById('btnSendIgTxt'))document.getElementById('btnSendIgTxt').textContent='Pedir por Instagram DM';
+  if(document.getElementById('sendIgIco'))document.getElementById('sendIgIco').innerHTML=ic('ig',17);
 
   // Nav
   document.getElementById('navBody').innerHTML=t.navCats.map((label,i)=>`
@@ -1933,6 +2003,15 @@ function openProduct(id){
   }
   document.getElementById('ctaLbl').innerHTML=`<strong>${fmt(dp)}</strong>${S.discount&&qty<DLIMIT?`&nbsp;·&nbsp;<span style="color:#3A7A4A;font-size:11px">${S.discount} ✓</span>`:''}`;
   document.getElementById('btnWA').href=`https://wa.me/${S.wa}?text=${encodeURIComponent(t.waMsg(pName(p),pMat(p),fmt(dp),S.discount))}`;
+  // Instagram DM button
+  const igBtn=document.getElementById('btnIG');
+  const igLbl=document.getElementById('btnIGLbl');
+  const igIco=document.getElementById('igIco');
+  if(igBtn){
+    igBtn.href=S.ig?`https://ig.me/m/${S.ig}`:'https://instagram.com';
+    if(igLbl)igLbl.textContent='Comprar por Instagram DM';
+    if(igIco)igIco.innerHTML=ic('ig',17);
+  }
   document.getElementById('btnWALbl').textContent=t.btnWA;
   document.getElementById('btnAddLbl').textContent=t.btnAdd;
 
@@ -2051,7 +2130,7 @@ function updateCartUI(){
           <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:2px">
             ${showStrike?`<span style="font-size:12px;color:var(--blush);text-decoration:line-through">${fmt(origTotal)}</span>`:''}
             <span class="ci-price" style="color:${showStrike?'#8B3A20':'var(--dark)'};font-weight:600">${fmt(lineTotal)}</span>
-            ${showSavings?`<span style="font-size:11px;color:#3A7A4A;font-weight:600">${t.savings?t.savings(fmt(saved)):'Ahorras '+fmt(saved)}</span>`:''}
+            ${showSavings?`<span style="font-size:11px;color:#3A7A4A;font-weight:600">Antes: ${fmt(origTotal)}</span>`:''}
           </div>
         </div>
         <button class="ci-del" onclick="removeItem(${idx})">${ic('trash',15)}</button>
@@ -2067,13 +2146,19 @@ function updateCartUI(){
   if(S.discount&&qty>DLIMIT){lim.innerHTML=ic('tag',12,'#8B3A20')+'&nbsp;'+t.cartLim;lim.classList.add('on');}
   else lim.classList.remove('on');
   const di=document.getElementById('cartDiscEl');
+  const origEl=document.getElementById('cartOrigEl');
   if(totalSaved>0.5&&S.cart.length>0){
-    const saveTxt=t.cartSavingsTotal?t.cartSavingsTotal(fmt(totalSaved)):`Total ahorrado: ${fmt(totalSaved)}`;
-    di.textContent=saveTxt;di.classList.add('on');
-  }else di.classList.remove('on');
+    di.classList.remove('on'); // hide old savings line
+    if(origEl){origEl.textContent=`En vez de pagar ${fmt(origGrand)}`;origEl.style.display='block';}
+  }else{
+    di.classList.remove('on');
+    if(origEl)origEl.style.display='none';
+  }
   if(document.getElementById('cartTtl'))document.getElementById('cartTtl').textContent=t.cartTtl;
-  if(document.getElementById('totLbl'))document.getElementById('totLbl').textContent=t.cartTotal;
+  if(document.getElementById('totLbl'))document.getElementById('totLbl').textContent='TOTAL';
   if(document.getElementById('btnSendTxt'))document.getElementById('btnSendTxt').textContent=t.btnSend;
+  if(document.getElementById('btnSendIgTxt'))document.getElementById('btnSendIgTxt').textContent='Pedir por Instagram DM';
+  if(document.getElementById('sendIgIco'))document.getElementById('sendIgIco').innerHTML=ic('ig',17);
   if(document.getElementById('cartEmptyP'))document.getElementById('cartEmptyP').innerHTML=t.cartEmpty.replace('\n','<br>');
 }
 
@@ -2091,13 +2176,34 @@ function toggleCart(){
     drw.classList.add('open');
     vl.classList.add('open');
     document.body.style.overflow='hidden';
-    try{updateCartUI();}catch(e){console.error('Cart UI error:',e);}
+    try{updateCartUI();renderCartExtras();renderFreeGiftBanner();}catch(e){console.error('Cart UI error:',e);}
   }
 }
 function sendCartWA(){
   if(!S.cart.length)return;const t=tx();
   const items=S.cart.map(i=>`• ${pName(i)} (×${i.qty}) — ${fmt((i.sale||i.price)*i.qty)}`).join('\n');
-  window.open(`https://wa.me/${S.wa}?text=${encodeURIComponent(t.cartWA(items,fmt(calcTotal()),S.discount,S.discountPct))}`,'_blank');
+  const extTxt=extrasText();
+  const allItems=extTxt?items+'\n'+extTxt:items;
+  const grand=calcTotal()+extrasTotal();
+  window.open(`https://wa.me/${S.wa}?text=${encodeURIComponent(t.cartWA(allItems,fmt(grand),S.discount,S.discountPct))}`,'_blank');
+}
+
+function sendCartIG(){
+  if(!S.cart.length)return;
+  const t=tx();
+  const items=S.cart.map(i=>`• ${pName(i)} (×${i.qty}) — ${fmt((i.sale||i.price)*i.qty)}`).join('\n');
+  const extTxt=extrasText();
+  const allItems=extTxt?items+'\n'+extTxt:items;
+  const grand=calcTotal()+extrasTotal();
+  const msg=t.cartWA?t.cartWA(allItems,fmt(grand),S.discount,S.discountPct):`Hola! Me interesa hacer un pedido:\n${allItems}\nTotal: ${fmt(grand)}`;
+  // Copy message to clipboard then open Instagram DM
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(msg).then(()=>{
+      showToast('Mensaje copiado — pégalo en el DM 📋');
+    }).catch(()=>{});
+  }
+  const igUser=S.ig||'soltintarosa';
+  window.open(`https://ig.me/m/${igUser}`,'_blank');
 }
 
 // ══════════════════════════════════════════════════
@@ -2156,8 +2262,9 @@ function checkPw(){
 // ADMIN
 // ══════════════════════════════════════════════════
 function openAdmin(){
-  renderAdmProdList();renderCodeList();renderBannerList();openCatMenuAdmin();renderRtbAdmin();openEditorialAdmin();
+  renderAdmProdList();renderCodeList();renderBannerList();openCatMenuAdmin();renderRtbAdmin();openEditorialAdmin();renderExtrasAdmin();
   document.getElementById('waInput').value=S.wa;
+  if(document.getElementById('igInput'))document.getElementById('igInput').value=S.ig||'';
   document.getElementById('featInput').value=S.featured.join(',');
   // Start with one empty image input for new products
   if(!document.getElementById('ePid').value){
@@ -2336,7 +2443,7 @@ function addBanner(){
 }
 function delBanner(i){S.customBanners.splice(i,1);renderBannerList();rebuildBanner();persistState();showToast(tx().bannerDel);}
 function saveFeatured(){S.featured=document.getElementById('featInput').value.split(',').map(v=>parseInt(v.trim())).filter(Boolean);renderProducts();persistState();showToast(tx().featOk);}
-function saveWA(){S.wa=document.getElementById('waInput').value.trim();persistState();showToast(tx().waOk);}
+function saveWA(){S.wa=document.getElementById('waInput').value.trim();S.ig=document.getElementById('igInput')?.value.trim()||S.ig;persistState();showToast(tx().waOk);}
 function saveNewPw(){const v=document.getElementById('newPwInp').value.trim();if(!v)return;adminPw=v;localStorage.setItem(ADMIN_KEY,v);document.getElementById('newPwInp').value='';showToast(tx().pwChanged);}
 
 // THEME
@@ -2702,6 +2809,9 @@ function loadState(){
     if(d.heroSlides&&d.heroSlides.length>0)S.heroSlides=d.heroSlides;
     if(d.heroContent)S.heroContent=d.heroContent;
     if(d.wa)S.wa=d.wa;
+    if(d.ig)S.ig=d.ig;
+    if(d.extras)S.extras=d.extras;
+    S.selectedExtras=[];
     if(d.codes&&Object.keys(d.codes).length)S.codes=d.codes;
     if(d.featured)S.featured=d.featured;
     if(d.customBanners)S.customBanners=d.customBanners;
@@ -2720,6 +2830,8 @@ function persistState(){
       heroSlides:S.heroSlides,
       heroContent:S.heroContent,
       wa:S.wa,
+      ig:S.ig,
+      extras:S.extras,
       codes:S.codes,
       featured:S.featured,
       customBanners:S.customBanners||[],
@@ -3097,6 +3209,111 @@ function saveRtbanner(){
 }
 
 
+
+// ── EXTRAS ──
+function renderCartExtras(){
+  const wrap=document.getElementById('cartExtras');
+  if(!wrap)return;
+  const active=(S.extras||[]).filter(e=>e.active);
+  if(!active.length||!S.cart.length){wrap.style.display='none';return;}
+  wrap.style.display='';
+  wrap.innerHTML=`<p class="cart-extras-ttl">${ic('sparkle',11,'var(--gold)')}&nbsp;Agrega a tu pedido</p>`+
+    active.map(e=>{
+      const sel=S.selectedExtras.includes(e.id);
+      const isFree=e.free;
+      return`<div class="extra-item${sel?' selected':''}${isFree?' free':''}" onclick="toggleExtra('${e.id}')">
+        <div class="extra-ico">${ic(e.icon||'box',16)}</div>
+        <div class="extra-info">
+          <span class="extra-name">${e.name}</span>
+          <span class="extra-desc">${e.desc}</span>
+        </div>
+        <span class="extra-price${isFree?' free-tag':''}">${isFree?'GRATIS':'$'+e.price}</span>
+        <div class="extra-check">${sel?ic('x',9,'#fff'):'+'}</div>
+      </div>`;
+    }).join('');
+}
+
+function toggleExtra(id){
+  const idx=S.selectedExtras.indexOf(id);
+  if(idx>-1)S.selectedExtras.splice(idx,1);
+  else S.selectedExtras.push(id);
+  renderCartExtras();
+  updateCartTotals();
+}
+
+function extrasTotal(){
+  return(S.extras||[]).filter(e=>e.active&&!e.free&&S.selectedExtras.includes(e.id)).reduce((s,e)=>s+e.price,0);
+}
+
+function extrasText(){
+  const lines=[];
+  (S.extras||[]).filter(e=>e.active&&S.selectedExtras.includes(e.id)).forEach(e=>{
+    lines.push(`• [Extra] ${e.name} — ${e.free?'GRATIS':'$'+e.price}`);
+  });
+  return lines.join('\n');
+}
+
+function updateCartTotals(){
+  // Recalculate total including extras
+  const base=calcTotal();
+  const ext=extrasTotal();
+  const grand=base+ext;
+  const origGrand=S.cart.reduce((s,i)=>s+i.price*i.qty,0)+ext;
+  const totalSaved=Math.round((origGrand-grand)*100)/100;
+  const totEl=document.getElementById('totPrice');
+  if(totEl)totEl.textContent=fmt(grand);
+  const origEl=document.getElementById('cartOrigEl');
+  if(origEl){
+    if(totalSaved>0.5&&S.cart.length>0){
+      origEl.textContent=`En vez de pagar ${fmt(origGrand)}`;
+      origEl.style.display='block';
+    }else origEl.style.display='none';
+  }
+}
+
+function renderFreeGiftBanner(){
+  const banner=document.getElementById('freeGiftBanner');
+  const ico=document.getElementById('fgbIco');
+  const txt=document.getElementById('fgbTxt');
+  if(!banner)return;
+  const freeExtras=(S.extras||[]).filter(e=>e.active&&e.free);
+  if(freeExtras.length){
+    banner.style.display='';
+    if(ico)ico.innerHTML=ic('sparkle',20,'#52b788');
+    const names=freeExtras.map(e=>e.name).join(' y ');
+    if(txt)txt.textContent=`Hoy tu pedido incluye ${names} gratis`;
+    // Auto-select free extras
+    freeExtras.forEach(e=>{if(!S.selectedExtras.includes(e.id))S.selectedExtras.push(e.id);});
+  }else{
+    banner.style.display='none';
+  }
+}
+
+function renderExtrasAdmin(){
+  const el=document.getElementById('extrasAdminList');
+  if(!el)return;
+  el.innerHTML=(S.extras||[]).map((e,i)=>`
+    <div class="extra-admin-item">
+      <div class="toggle-row" style="padding:0 0 6px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="color:var(--rose-deep)">${ic(e.icon||'box',14)}</span>
+          <span style="font-size:13px;font-weight:700">${e.name}</span>
+        </div>
+        <label class="toggle-sw"><input type="checkbox" ${e.active?'checked':''} onchange="S.extras[${i}].active=this.checked;renderFreeGiftBanner();persistState()"><span class="toggle-slider"></span></label>
+      </div>
+      <div class="toggle-row" style="padding:0 0 6px">
+        <span style="font-size:11px;color:#3A7A4A;font-weight:700">${ic('sparkle',11,'#3A7A4A')} Gratis esta temporada</span>
+        <label class="toggle-sw"><input type="checkbox" ${e.free?'checked':''} onchange="S.extras[${i}].free=this.checked;renderFreeGiftBanner();persistState()"><span class="toggle-slider"></span></label>
+      </div>
+      <div class="a-f" style="margin:0">
+        <label>Precio cuando no es gratis ($)</label>
+        <input type="number" value="${e.price}" onchange="S.extras[${i}].price=parseFloat(this.value)||0;persistState()" style="margin:0">
+      </div>
+    </div>`).join('')+
+    `<button class="btn-save" onclick="persistState();renderCartExtras();showToast('Extras guardados ✓')">Guardar extras</button>`;
+}
+
+
 // INIT
 document.addEventListener('DOMContentLoaded',()=>{
   loadState();
@@ -3104,6 +3321,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderPage();
   renderCatMenu();
   renderRtbanner();
+  renderFreeGiftBanner();
   document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
   window.addEventListener('scroll',revealAll,{passive:true});
   revealAll();
